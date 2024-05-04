@@ -1,12 +1,35 @@
 import sys
+import re
+import unicodedata
 import queue
 import threading
 import json
 import collections
+import string
 
 from spirecomm.spire.game import Game
 from spirecomm.spire.screen import ScreenType
 from spirecomm.communication.action import Action, StartGameAction
+import socket
+
+# is_socket = True
+is_socket = True
+host = '127.0.0.1'
+port = 8080
+if is_socket:
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket.connect((host, port))
+
+
+def remove_non_ascii(text):
+    return re.sub(r'[^\x00-\x7F]', ' ', text)
+
+
+def replace_content(text):
+    pattern = r'^[^{]*({)'
+    replacement = '{'
+    result = re.sub(pattern, replacement, text)
+    return result
 
 
 def read_stdin(input_queue):
@@ -16,15 +39,27 @@ def read_stdin(input_queue):
     :type input_queue: queue.Queue
     :return: None
     """
-    while True:
-        stdin_input = ""
+
+    if is_socket:
+        with client_socket as s:
+            print('recv begin...')
+            while True:
+                recv_s = s.recv(16384).decode('latin-1').strip()
+                input_queue.put(replace_content(recv_s))
+    else:
         while True:
-            input_char = sys.stdin.read(1)
-            if input_char == '\n':
-                break
-            else:
-                stdin_input += input_char
-        input_queue.put(stdin_input)
+            stdin_input = ""
+            while True:
+                input_char = sys.stdin.read(1)
+                if input_char == '\n':
+                    break
+                else:
+                    stdin_input += input_char
+            input_queue.put(stdin_input)
+
+
+def remove_non_ascii(text):
+    return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
 
 
 def write_stdout(output_queue):
@@ -34,9 +69,17 @@ def write_stdout(output_queue):
     :type output_queue: queue.Queue
     :return: None
     """
-    while True:
-        output = output_queue.get()
-        print(output, end='\n', flush=True)
+    if not is_socket:
+        while True:
+            output = output_queue.get()
+            print(output, end='\n', flush=True)
+    else:
+        with client_socket as s:
+            while True:
+                output = output_queue.get()
+                if not output.endswith('\n'):
+                    output += '\n'
+                s.sendall(output.encode())
 
 
 class Coordinator:
@@ -67,7 +110,7 @@ class Coordinator:
         Must be used once, before any other commands can be sent.
         :return: None
         """
-        self.send_message("ready")
+        self.send_message("state")
 
     def send_message(self, message):
         """Send a command to Communication Mod and start waiting for a response
@@ -166,7 +209,8 @@ class Coordinator:
             if self.last_error is None:
                 self.in_game = communication_state.get("in_game")
                 if self.in_game:
-                    self.last_game_state = Game.from_json(communication_state.get("game_state"), communication_state.get("available_commands"))
+                    self.last_game_state = Game.from_json(communication_state.get("game_state"),
+                                                          communication_state.get("available_commands"))
             if perform_callbacks:
                 if self.last_error is not None:
                     self.action_queue.clear()
@@ -218,4 +262,3 @@ class Coordinator:
             return self.last_game_state.screen.victory
         else:
             return False
-
