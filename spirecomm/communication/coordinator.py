@@ -16,6 +16,7 @@ import socket
 is_socket = True
 host = '127.0.0.1'
 port = 8080
+recv_s = ''
 if is_socket:
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((host, port))
@@ -39,13 +40,13 @@ def read_stdin(input_queue):
     :type input_queue: queue.Queue
     :return: None
     """
-
+    global recv_s
     if is_socket:
         with client_socket as s:
             print('recv begin...')
             while True:
-                recv_s = s.recv(16384).decode('latin-1').strip()
-                input_queue.put(replace_content(recv_s))
+                recv_s = replace_content(s.recv(16384).decode('latin-1').strip())
+                input_queue.put(recv_s)
     else:
         while True:
             stdin_input = ""
