@@ -1,0 +1,101 @@
+{
+  "cards_info": [
+    {
+      "name": "anger",
+      "cn_name": "愤怒",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 4
+      },
+      "card_type": ["attack"],
+      "deck_construct": ["temp"],
+      "change_card_pile": {
+        "pile_type": "discard_pile",
+        "change_type": "add",
+        "count": 1
+      },
+      "benefit_for": {
+        "case": ["low_energy"],
+        "cards": []
+      },
+      "benefitted_by": []
+    },
+    {
+      "name": "armaments",
+      "cn_name": "武装",
+      "pick": {
+        "score": 7.5,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 9
+      },
+      "card_type": ["block", "upgrade"],
+      "deck_construct": ["half-final"],
+      "change_card_pile": {},
+      "benefit_for": {
+        "case": ["low_energy"],
+        "cards": ["every_cards_with_high_upgrade_score"],
+        "relic": ["fusion_hammer"]
+      },
+      "benefitted_by": []
+    },
+    {
+      "name": "pommel Strike",
+      "cn_name": "剑柄",
+      "pick": {
+        "score": 8,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 8
+      },
+      "card_type": ["attack"],
+      "deck_construct": ["final"],
+      "change_card_pile": {
+        "pile_type": "in_hand",
+        "change_type": "add",
+        "count": 1
+      },
+      "draw_cards_feature": true,
+      "benefit_for": {
+        "case": ["need_draw_cards"],
+        "cards": []
+      },
+      "benefitted_by": []
+    },
+    {
+      "name": "body slam",
+      "cn_name": "肚皮",
+      "pick": {
+        "score": -1,
+        "case": ["low_energy", "get_block_cards"],
+        "limit": {
+          "count": 2
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": ["attack"],
+      "deck_construct": ["final"],
+      "change_card_pile": {},
+      "benefit_for": {
+        "case": ["need_draw_cards", "low_energy"],
+        "cards": []
+      },
+      "benefitted_by": ["cards_with_block_gain"]
+    }
+  ]
+}
