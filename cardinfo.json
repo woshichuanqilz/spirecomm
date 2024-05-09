@@ -1749,7 +1749,95 @@
         }
       },
       "upgrade": {
-        "score": 7
+        "score": 5
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["gain_block", "exhaust"],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "juggernaut",
+      "cn_name": "势不可当",
+      "pick": {
+        "score": 4,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 4
+      },
+      "card_type": [
+        "power"
+      ],
+      "deck_construct": [
+        "temp"
+      ],
+      "features": [],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "limit_break",
+      "cn_name": "突破极限",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 6
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["gain_strength"],
+      "benefit_for": {},
+      "benefitted_by": {"case": ["gain_strength"]}
+    },
+    {
+      "name": "offering",
+      "cn_name": "祭品",
+      "pick": {
+        "score": 8,
+        "limit": {
+          "count": 3
+        }
+      },
+      "upgrade": {
+        "score": 8
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["self_harm", "gain_energy"],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "reaper",
+      "cn_name": "死亡收割",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 2
+        }
+      },
+      "upgrade": {
+        "score": 1
       },
       "card_type": [
         "attack"
@@ -1757,9 +1845,9 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["add_status_card", "add_burn"],
+      "features": ["heal"],
       "benefit_for": {},
-      "benefitted_by": {}
+      "benefitted_by": {"case": ["gain_strength"]}
     },
   ]
 }
