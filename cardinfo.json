@@ -1,4 +1,20 @@
 {
+  "key_cards": [
+    "rampage"
+  ],
+  "cards_for_case": {
+    "need_self_harm": [
+      "blood_for_blood",
+      "rupture"
+    ],
+    "benefit_for_exhaust": ["dark_embrace", "feel_no_pain"],
+    "self_harm": ["pain_curse"],
+    "add_status_card": ["relic医药箱"],
+    "benefit_by_strength": [],
+  },
+  "relic_combo": {
+    "necronomicon": [],
+  }
   "cards_info": [
     {
       "name": "anger",
@@ -13,18 +29,28 @@
       "upgrade": {
         "score": 4
       },
-      "card_type": ["attack"],
-      "deck_construct": ["temp"],
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "temp"
+      ],
       "change_card_pile": {
         "pile_type": "discard_pile",
         "change_type": "add",
         "count": 1
       },
       "benefit_for": {
-        "case": ["low_energy"],
+        "case": [
+          "low_energy"
+        ],
         "cards": []
       },
-      "benefitted_by": []
+      "benefitted_by": {
+        "case": [
+          "draw_cards"
+        ]
+      }
     },
     {
       "name": "armaments",
@@ -39,15 +65,294 @@
       "upgrade": {
         "score": 9
       },
-      "card_type": ["block", "upgrade"],
-      "deck_construct": ["half-final"],
+      "card_type": [
+        "skill"
+      ],
+      "features": [
+        "gain_block",
+        "upgrade"
+      ],
+      "deck_construct": [
+        "half-final"
+      ],
       "change_card_pile": {},
       "benefit_for": {
-        "case": ["low_energy"],
-        "cards": ["every_cards_with_high_upgrade_score"],
-        "relic": ["fusion_hammer"]
+        "case": [
+          "low_energy"
+        ],
+        "cards": [
+          "every_cards_with_high_upgrade_score"
+        ],
+        "relic": [
+          "fusion_hammer"
+        ]
       },
-      "benefitted_by": []
+      "benefitted_by": {}
+    },
+    {
+      "name": "clash",
+      "cn_name": "交锋",
+      "pick": {
+        "score": 1,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 1
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "temp"
+      ],
+      "change_card_pile": {},
+      "benefit_for": {
+        "case": [
+          "low_energy"
+        ]
+      },
+      "benefitted_by": {}
+    },
+    {
+      "name": "cleave",
+      "cn_name": "顺劈",
+      "pick": {
+        "score": 1,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 1
+      },
+      "card_type": [
+        "attack",
+        "aoe"
+      ],
+      "deck_construct": [
+        "temp"
+      ],
+      "change_card_pile": {},
+      "benefit_for": {
+        "case": []
+      },
+      "benefitted_by": {}
+    },
+    {
+      "name": "clothesline",
+      "cn_name": "上钩拳",
+      "pick": {
+        "score": 3,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 1
+      },
+      "card_type": [
+        "attack"
+      ],
+      "features": [
+        "weaken"
+      ],
+      "deck_construct": [
+        "temp"
+      ],
+      "change_card_pile": {},
+      "benefit_for": {
+        "case": []
+      },
+      "benefitted_by": {}
+    },
+    {
+      "name": "flex",
+      "cn_name": "肌肉",
+      "pick": {
+        "score": 4,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 6
+      },
+      "card_type": [
+        "skill"
+      ],
+      "features": [
+        "weaken"
+      ],
+      "deck_construct": [
+        "temp"
+      ],
+      "change_card_pile": {},
+      "benefit_for": {
+        "case": []
+      },
+      "benefitted_by": {}
+    },
+    {
+      "name": "havoc",
+      "cn_name": "破灭",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 2,
+          "act": 3
+        }
+      },
+      "upgrade": {
+        "score": 6.5
+      },
+      "card_type": [
+        "skill"
+      ],
+      "features": [
+        "exhaust"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "change_card_pile": {},
+      "benefit_for": {
+        "case": [
+          "low_energy"
+        ]
+      },
+      "benefitted_by": {
+        "case": [
+          "need_exhaust"
+        ],
+        "cards": [
+          "dark_embrace",
+          "feel_no_pain"
+        ]
+      }
+    },
+    {
+      "name": "body_slam",
+      "cn_name": "肚皮",
+      "pick": {
+        "score": -1,
+        "case": [
+          "low_energy",
+          "get_block_cards"
+        ],
+        "limit": {
+          "count": 2
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "change_card_pile": {},
+      "benefit_for": {
+        "case": [
+          "need_draw_cards",
+          "low_energy"
+        ],
+        "cards": []
+      },
+      "benefitted_by": [
+        "cards_with_block_gain"
+      ]
+    },
+    {
+      "name": "headbutt",
+      "cn_name": "头锤",
+      "pick": {
+        "score": 6,
+        "case": [
+          "draw_cards"
+        ],
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 0
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "half-final"
+      ],
+      "change_card_pile": [
+        {
+          "pile_type": "discard_pile",
+          "change_type": "remove",
+          "count": 1
+        },
+        {
+          "pile_type": "draw_pile",
+          "change_type": "add",
+          "count": 1
+        }
+      ],
+      "benefit_for": {
+        "case": [
+          "need_draw_cards",
+          "key_cards"
+        ],
+        "cards": []
+      },
+      "benefitted_by": [
+        "cards_with_block_gain"
+      ]
+    },
+    {
+      "name": "heavy_blade"
+    },
+    {
+      "name": "iron_wave"
+    },
+    {
+      "name": "perfect_strike",
+      "cn_name": "完美打击",
+      "pick": {
+        "score": 3,
+        "case": [],
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "half-final"
+      ],
+      "change_card_pile": [],
+      "benefit_for": {
+        "case": [
+          "need_draw_cards",
+          "key_cards"
+        ],
+        "cards": []
+      },
+      "benefitted_by": {
+        "cards": [
+          "strike"
+        ]
+      }
     },
     {
       "name": "pommel Strike",
@@ -61,26 +366,118 @@
       "upgrade": {
         "score": 8
       },
-      "card_type": ["attack"],
-      "deck_construct": ["final"],
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
       "change_card_pile": {
         "pile_type": "in_hand",
         "change_type": "add",
         "count": 1
       },
-      "draw_cards_feature": true,
+      "features": [
+        "draw_cards"
+      ],
       "benefit_for": {
-        "case": ["need_draw_cards"],
+        "case": [
+          "need_draw_cards"
+        ],
         "cards": []
       },
-      "benefitted_by": []
+      "benefitted_by": {}
     },
     {
-      "name": "body slam",
-      "cn_name": "肚皮",
+      "name": "shrug_it_off",
+      "cn_name": "耸肩",
       "pick": {
-        "score": -1,
-        "case": ["low_energy", "get_block_cards"],
+        "score": 6,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 4
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "change_card_pile": [],
+      "features": [
+        "gain_block",
+        "draw_cards"
+      ],
+      "benefit_for": {
+        "case": [
+          "need_draw_cards"
+        ],
+        "cards": []
+      },
+      "benefitted_by": {}
+    },
+    {
+      "name": "sword_boomerang",
+      "cn_name": "飞剑",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "change_card_pile": [],
+      "features": [
+        "attack_multi_times"
+      ],
+      "benefit_for": {},
+      "benefitted_by": {
+        "case": [
+          "gain_strength"
+        ]
+      }
+    },
+    {
+      "name": "thunderclap",
+      "cn_name": "闪电",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "change_card_pile": [],
+      "features": [
+        "attack_multi_times"
+      ],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "true_grid",
+      "cn_name": "坚毅",
+      "pick": {
+        "score": 6,
         "limit": {
           "count": 2
         }
@@ -88,14 +485,1281 @@
       "upgrade": {
         "score": 7
       },
-      "card_type": ["attack"],
-      "deck_construct": ["final"],
-      "change_card_pile": {},
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "change_card_pile": [],
+      "features": [
+        "exhaust",
+        "gain_block"
+      ],
+      "benefit_for": {},
+      "benefitted_by": {
+        "case": [
+          "need_exhaust"
+        ]
+      }
+    },
+    {
+      "name": "twin_strike",
+      "cn_name": "双重打击",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 2
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "change_card_pile": [],
+      "features": [
+        "exhaust",
+        "gain_block"
+      ],
+      "benefit_for": {},
+      "benefitted_by": {
+        "case": [
+          "need_exhaust"
+        ]
+      }
+    },
+    {
+      "name": "warcry",
+      "cn_name": "战吼",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 5
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "change_card_pile": [],
+      "features": [
+        "exhaust",
+        "draw_cards",
+        "not_pick_without_upgrade"
+      ],
+      "benefit_for": {},
+      "benefitted_by": {
+        "case": [
+          "need_exhaust"
+        ]
+      }
+    },
+    {
+      "name": "wild_strike",
+      "cn_name": "狂野",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 5
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "temp"
+      ],
+      "change_card_pile": [
+        {
+          "pile_type": "draw_pile",
+          "change_type": "add",
+          "count": 1
+        }
+      ],
+      "features": [
+        "add_status_card",
+        "add_wound"
+      ],
+      "benefit_for": {},
+      "benefitted_by": {
+        "cards": [
+          "evolve"
+        ]
+      }
+    },
+    {
+      "name": "battle_trance",
+      "cn_name": "战斗专注",
+      "pick": {
+        "score": 7,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [
+        "draw_cards",
+        "cant_draw_anymore"
+      ],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "blood_for_blood",
+      "cn_name": "以血还血",
+      "pick": {
+        "score": 7,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [
+        "need_self_harm"
+      ],
       "benefit_for": {
-        "case": ["need_draw_cards", "low_energy"],
+        "case": "low_energy"
+      },
+      "benefitted_by": {
+        "cards": [
+          "combust",
+          "brutality"
+        ],
+        "case": [
+          "need_self_harm"
+        ]
+      }
+    },
+    {
+      "name": "bloodletting",
+      "cn_name": "放血",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 6.5
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [
+        "self_harm",
+        "gain_energy"
+      ],
+      "benefit_for": {
+        "case": "low_energy"
+      },
+      "benefitted_by": {}
+    },
+    {
+      "name": "burning_pact",
+      "cn_name": "燃烧契约",
+      "pick": {
+        "score": 7,
+        "limit": {
+          "count": 2
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [
+        "draw_cards",
+        "exhaust"
+      ],
+      "benefitted_by": {
+        "case": [
+          "need_exhaust"
+        ]
+      }
+    },
+    {
+      "name": "carnage",
+      "cn_name": "残杀",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 6
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "half-final"
+      ],
+      "features": [
+        "ethereal",
+        "tmp_damage"
+      ],
+      "benefitted_by": {
+        "case": [
+          "need_exhaust"
+        ]
+      }
+    },
+    {
+      "name": "combust",
+      "cn_name": "自燃",
+      "pick": {
+        "score": 4,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 0
+      },
+      "card_type": [
+        "power"
+      ],
+      "deck_construct": [
+        "temp"
+      ],
+      "features": [
+        "self_harm"
+      ],
+      "benefit_for": {
+        "case": [
+          "need_self_harm"
+        ]
+      }
+    },
+    {
+      "name": "dark_embrace",
+      "cn_name": "黑拥",
+      "pick": {
+        "score": 7,
+        "limit": {
+          "count": 2
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "power"
+      ],
+      "deck_construct": [
+        "temp"
+      ],
+      "features": [
+        "need_exhaust"
+      ],
+      "benefitted_by": {
+        "case": [
+          "exhaust"
+        ]
+      }
+    },
+    {
+      "name": "disarm",
+      "cn_name": "缴械",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 4
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "temp"
+      ],
+      "features": [
+        "need_exhaust"
+      ],
+      "benefitted_by": {
+        "case": [
+          "exhaust"
+        ]
+      }
+    },
+    {
+      "name": "dropkick",
+      "cn_name": "飞身踢",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 2
+        }
+      },
+      "upgrade": {
+        "score": 1
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [
+        "need_vulnerable",
+        "draw_cards",
+        "gain_energy"
+      ],
+      "benefitted_by": {
+        "case": [
+          "vulnerable"
+        ]
+      }
+    },
+    {
+      "name": "dual_wield",
+      "cn_name": "双持",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 6
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [],
+      "benefit_for": {
+        "case": [],
         "cards": []
       },
-      "benefitted_by": ["cards_with_block_gain"]
-    }
+      "benefitted_by": {
+        "cards": [
+          "feel_no_pain",
+          "body_slam",
+          "blood_for_blood"
+        ]
+      }
+    },
+    {
+      "name": "entrench",
+      "cn_name": "巩固",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [],
+      "benefit_for": {
+        "cards": [
+          "barricade"
+        ]
+      },
+      "benefitted_by": {
+        "cards": [
+          "barricade"
+        ]
+      }
+    },
+    {
+      "name": "evolve",
+      "cn_name": "进化",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "power"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [
+        "draw_cards"
+      ],
+      "benefit_for": {
+        "case": [
+          "add_status_card"
+        ]
+      },
+      "benefitted_by": {
+        "case": [
+          "add_status_card"
+        ]
+      }
+    },
+    {
+      "name": "feel_no_pain",
+      "cn_name": "无惧",
+      "pick": {
+        "score": 7,
+        "limit": {
+          "count": 2
+        }
+      },
+      "upgrade": {
+        "score": 6
+      },
+      "card_type": [
+        "power"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [
+        "gain_block",
+        "need_exhaust"
+      ],
+      "benefit_for": {
+        "case": [
+          "exhaust"
+        ]
+      },
+      "benefitted_by": {
+        "case": [
+          "exhaust"
+        ]
+      }
+    },
+    {
+      "name": "fire_breathing"
+    },
+    {
+      "name": "flame_barrier"
+    },
+    {
+      "name": "ghostly_armor",
+      "cn_name": "幽灵铠甲",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 3
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "half-final"
+      ],
+      "features": [
+        "gain_block",
+        "ethereal"
+      ],
+      "benefit_for": {
+        "case": [
+          "need_exhaust"
+        ]
+      },
+      "benefitted_by": {}
+    },
+    {
+      "name": "hemokinesis",
+      "cn_name": "御血术",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 6
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "half-final"
+      ],
+      "features": [
+        "self_harm",
+      ],
+      "benefit_for": {
+        "case": [
+          "need_self_harm"
+        ]
+      },
+      "benefitted_by": {
+        "cards": ["rupture", "blood_for_blood"]
+      }
+    },
+    {
+      "name": "infernal_blade",
+      "cn_name": "地狱之刃",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 3
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "half-final"
+      ],
+      "features": [
+        "exhaust",
+      ],
+      "benefit_for": {
+        "case": [
+          "need_exhaust"
+        ]
+      },
+      "benefitted_by": {
+        "cards": ["need_exhaust"]
+      }
+    },
+    {
+      "name": "inflame",
+      "cn_name": "燃烧",
+      "pick": {
+        "score": 6.5,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 6
+      },
+      "card_type": [
+        "power"
+      ],
+      "deck_construct": [
+        "half-final"
+      ],
+      "features": [
+        "gain_strength",
+      ],
+      "benefit_for": {
+        "case": []
+      },
+      "benefitted_by": {
+        "cards": []
+      }
+    },
+    {
+      "name": "intimidate",
+      "cn_name": "威吓",
+      "pick": {
+        "score": 3,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 1
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "half-final"
+      ],
+      "features": [
+        "exhaust",
+      ],
+      "benefit_for": {
+        "case": [
+          "need_exhaust"
+        ]
+      },
+      "benefitted_by": {
+        "cards": ["need_exhaust"]
+      }
+    },
+    {
+      "name": "metallicize",
+      "cn_name": "金属化",
+      "pick": {
+        "score": 5.5,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 1
+      },
+      "card_type": [
+        "power"
+      ],
+      "deck_construct": [
+        "temp"
+      ],
+      "features": [
+        "gain_block",
+      ],
+      "benefit_for": {
+        "case": []
+      },
+      "benefitted_by": {
+        "cards": []
+      }
+    },
+    {
+      "name": "power_through",
+      "cn_name": "硬撑",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 5
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [
+        "gain_block", "add_status_card", "add_wound"
+      ],
+      "benefit_for": {
+        "case": []
+      },
+      "benefitted_by": {
+        "cards": ["evolve"],
+      }
+    },
+    {
+      "name": "pummel",
+      "cn_name": "连续拳",
+      "pick": {
+        "score": 1,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 1
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [],
+      "benefit_for": {
+        "case": []
+      },
+      "benefitted_by": {
+        "cards": [],
+      }
+    },
+    {
+      "name": "rage",
+      "cn_name": "狂怒",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 5
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["gain_block"],
+      "benefit_for": {
+        "case": []
+      },
+      "benefitted_by": {
+        "cards": ["blood_for_blood", "dropkick", "body_slam"],
+      }
+    },
+    {
+      "name": "rampage",
+      "cn_name": "暴走",
+      "pick": {
+        "score": 6.5,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 6.5
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [],
+      "benefit_for": {
+        "case": ["remove_cards_from_deck", "draw_cards"]
+      },
+      "benefitted_by": {
+      }
+    },
+    {
+      "name": "reckless_charge",
+      "cn_name": "无谋",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 1
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["add_status_card", "add_dazed", "exhaust"],
+      "change_card_pile": {
+        "pile_type": "draw_pile",
+        "change_type": "add",
+        "count": 1
+      },
+      "benefit_for": {
+        "cards": ["dark_embrace"]
+      },
+      "benefitted_by": {
+        "case": ["remove_cards_from_deck", "draw_cards"]
+      }
+    },
+    {
+      "name": "rupture",
+      "cn_name": "撕裂",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 6
+      },
+      "card_type": [
+        "power"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["gain_strength"],
+      "benefit_for": {
+        "cards": ["dark_embrace"]
+      },
+      "benefitted_by": {
+        "case": ["self_harm"]
+      }
+    },
+    {
+      "name": "searing_blow",
+      "cn_name": "灼热",
+      "pick": {
+        "score": 4,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "power"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [],
+      "benefit_for": {
+      },
+      "benefitted_by": {
+        "case": ["upgrade"]
+      }
+    },
+    {
+      "name": "second_wind",
+      "cn_name": "重振",
+      "pick": {
+        "score": 7,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 5
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["exhaust", "gain_block", "big_exhaust"],
+      "benefit_for": {
+        "case": ["need_block", "need_exhaust"]
+      },
+      "benefitted_by": {}
+    },
+    {"name": "sentinel"},
+    {
+      "name": "sever_soul",
+      "cn_name": "断魂斩",
+      "pick": {
+        "score": 4,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 1
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["exhaust", "big_exhaust"],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "shockwave",
+      "cn_name": "震荡波",
+      "pick": {
+        "score": 7,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["exhaust", "weaken", "vulnerable"],
+      "benefit_for": {
+        "cards": ["dropkick"]
+      },
+      "benefitted_by": {}
+    },
+    {
+      "name": "spotweakness",
+      "cn_name": "观察弱点",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 5
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["gain_strength"],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "uppercut",
+      "cn_name": "上钩拳",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["weaken", "vulnerable"],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "whirlwind",
+      "cn_name": "旋风斩",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["attack_multi_times", "x_times"],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "barricade",
+      "cn_name": "壁垒",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "power"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [],
+      "benefit_for": {},
+      "benefitted_by": {
+        "cards": ["entrench"]
+      }
+    },
+    {
+      "name": "berserk",
+      "cn_name": "狂暴",
+      "pick": {
+        "score": 3,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 6
+      },
+      "card_type": [
+        "power"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["gain_energy"],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "bludgeon",
+      "cn_name": "重锤",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 6
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "half-final"
+      ],
+      "features": [],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "brutality",
+      "cn_name": "残暴",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 4
+      },
+      "card_type": [
+        "power"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": [],
+      "benefit_for": {"case": ["need_self_harm"]},
+      "benefitted_by": {}
+    },
+    {
+      "name": "corruption",
+      "cn_name": "腐化",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "power"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["zero_cost", "exhaust"],
+      "benefit_for": {"case": ["low_energy"]},
+      "benefitted_by": {}
+    },
+    {
+      "name": "demon_form",
+      "cn_name": "恶魔形态",
+      "pick": {
+        "score": 7,
+        "limit": {
+          "count": 1,
+          "act": 1
+        }
+      },
+      "upgrade": {
+        "score": 6
+      },
+      "card_type": [
+        "power"
+      ],
+      "deck_construct": [
+        "half-final"
+      ],
+      "features": ["gain_strength"],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "double_tap",
+      "cn_name": "双发",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1,
+        }
+      },
+      "upgrade": {
+        "score": 6
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "half-final"
+      ],
+      "features": [],
+      "benefit_for": {"case": ["high_quality_attack"]},
+      "benefitted_by": {}
+    },
+    {
+      "name": "exhume",
+      "cn_name": "发掘",
+      "pick": {
+        "score": 5,
+        "limit": {
+          "count": 1,
+        }
+      },
+      "upgrade": {
+        "score": 6
+      },
+      "card_type": [
+        "skill"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["exhaust"],
+      "benefit_for": {"cards": ["offering", "feed"]},
+      "benefitted_by": {}
+    },
+    {
+      "name": "feed",
+      "cn_name": "饕餮",
+      "pick": {
+        "score": 7,
+        "limit": {
+          "count": 1,
+          "act": 1.5
+        }
+      },
+      "upgrade": {
+        "score": 5
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "half-final"
+      ],
+      "features": ["exhaust"],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "fiend_fire",
+      "cn_name": "恶魔之焰",
+      "pick": {
+        "score": 7,
+        "limit": {
+          "count": 1
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["exhaust", "big_exhaust"],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "immolate",
+      "cn_name": "燔祭",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1,
+          "act": 1.5,
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["add_status_card", "add_burn"],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
+    {
+      "name": "impervious",
+      "cn_name": "岿然不动",
+      "pick": {
+        "score": 6,
+        "limit": {
+          "count": 1,
+          "act": 1.5,
+        }
+      },
+      "upgrade": {
+        "score": 7
+      },
+      "card_type": [
+        "attack"
+      ],
+      "deck_construct": [
+        "final"
+      ],
+      "features": ["add_status_card", "add_burn"],
+      "benefit_for": {},
+      "benefitted_by": {}
+    },
   ]
 }
