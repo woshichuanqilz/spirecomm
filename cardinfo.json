@@ -11,13 +11,13 @@
     "benefit_for_self_harm": {
       "cards": ["pain_curse", "apparition"],
       "relic": ["tungsten_rod"]
-    }
+    },
     "add_status_card": ["relic医药箱"],
     "benefit_by_strength": [],
   },
   "relic_combo": {
-    "necronomicon": [],
-  }
+    "necronomicon": []
+  },
   "cards_info": [
     {
       "name": "anger",

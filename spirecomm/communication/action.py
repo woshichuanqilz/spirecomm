@@ -318,7 +318,8 @@ class StartGameAction(Action):
         arguments = [self.command, self.player_class.name, str(self.ascension_level)]
         if self.seed is not None:
             arguments.append(str(self.seed))
-        coordinator.send_message(" ".join(arguments))
+        # coordinator.send_message(" ".join(arguments))
+        coordinator.send_message('resume')
 
 
 class StateAction(Action):

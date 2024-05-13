@@ -238,7 +238,7 @@ class Coordinator:
             self.execute_next_action_if_ready()
             self.receive_game_state_update(perform_callbacks=True)
 
-    def play_one_game(self, player_class, ascension_level=0, seed=None):
+    def play_one_game(self, player_class, ascension_level=20, seed=None):
         """
 
         :param player_class: the class to play
