@@ -1,6 +1,12 @@
 import json
 
 
+def getNodeByXY(x, y, all_nodes):
+    for node in all_nodes:
+        if node['x'] == x and node['y'] == y:
+            return node
+
+
 def find_paths(start_nodes, all_nodes):
     paths = []
     current_path = []
@@ -21,10 +27,24 @@ def find_paths(start_nodes, all_nodes):
     return paths
 
 
-def getNodeByXY(x, y, all_nodes):
-    for node in all_nodes:
-        if node['x'] == x and node['y'] == y:
-            return node
+class PathEvaluator:
+    def __init__(self, cur_pos, paths):
+        self.paths = paths
+        self.cur_pos = cur_pos
+
+    def get_best_path(self):
+        result = []
+        for path in self.paths:
+            elite_count = 0
+            campfire_count = 0
+            for node in path:
+                if node['symbol'] == 'E':
+                    elite_count += 1
+                if node['symbol'] == 'R':
+                    campfire_count += 1
+            if elite_count >= 2 and campfire_count >= 2:
+                result.append(path)
+        return result
 
 
 class GetPaths:
@@ -63,4 +83,5 @@ class GetPaths:
 if __name__ == '__main__':
     k = GetPaths()
     paths = k.getAllPaths()
-    print(paths)
+    pe = PathEvaluator((0, 0), paths)
+    print(pe.get_best_path())
