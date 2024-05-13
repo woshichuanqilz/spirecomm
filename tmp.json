@@ -1,0 +1,1031 @@
+{
+  "available_commands": [
+    "play",
+    "restart_battle",
+    "end",
+    "potion",
+    "key",
+    "click",
+    "wait",
+    "state",
+    "resume"
+  ],
+  "ready_for_command": true,
+  "in_game": true,
+  "game_state": {
+    "screen_type": "NONE",
+    "screen_state": {},
+    "seed": 7974950428795294549,
+    "combat_state": {
+      "draw_pile": [
+        {
+          "exhausts": false,
+          "is_playable": true,
+          "cost": 1,
+          "name": "Strike",
+          "id": "Strike_R",
+          "type": "ATTACK",
+          "ethereal": false,
+          "uuid": "46bf82a3-6ffd-4d7d-ba35-edded1349a8a",
+          "upgrades": 0,
+          "rarity": "BASIC",
+          "has_target": true
+        },
+        {
+          "exhausts": false,
+          "is_playable": true,
+          "cost": 1,
+          "name": "Defend",
+          "id": "Defend_R",
+          "type": "SKILL",
+          "ethereal": false,
+          "uuid": "8a155617-a21c-4db5-83d2-78d3f17edaec",
+          "upgrades": 0,
+          "rarity": "BASIC",
+          "has_target": false
+        },
+        {
+          "exhausts": false,
+          "is_playable": true,
+          "cost": 1,
+          "name": "Strike",
+          "id": "Strike_R",
+          "type": "ATTACK",
+          "ethereal": false,
+          "uuid": "65a168c4-6880-4c22-9fbe-0359aa04978f",
+          "upgrades": 0,
+          "rarity": "BASIC",
+          "has_target": true
+        },
+        {
+          "exhausts": false,
+          "is_playable": true,
+          "cost": 1,
+          "name": "Defend",
+          "id": "Defend_R",
+          "type": "SKILL",
+          "ethereal": false,
+          "uuid": "a5b98cbf-914d-4405-892e-75455cc13f65",
+          "upgrades": 0,
+          "rarity": "BASIC",
+          "has_target": false
+        },
+        {
+          "exhausts": false,
+          "is_playable": true,
+          "cost": 2,
+          "name": "Bash",
+          "id": "Bash",
+          "type": "ATTACK",
+          "ethereal": false,
+          "uuid": "f42c6acc-5a45-4ca1-9200-abe0b674ba93",
+          "upgrades": 0,
+          "rarity": "BASIC",
+          "has_target": true
+        },
+        {
+          "exhausts": false,
+          "is_playable": true,
+          "cost": 1,
+          "name": "Strike",
+          "id": "Strike_R",
+          "type": "ATTACK",
+          "ethereal": false,
+          "uuid": "6b20f44e-89eb-4ee1-ad25-7ddd49f4b5f1",
+          "upgrades": 0,
+          "rarity": "BASIC",
+          "has_target": true
+        }
+      ],
+      "discard_pile": [],
+      "exhaust_pile": [],
+      "cards_discarded_this_turn": 0,
+      "times_damaged": 0,
+      "monsters": [
+        {
+          "is_gone": false,
+          "move_hits": 1,
+          "move_base_damage": 7,
+          "half_dead": false,
+          "move_adjusted_damage": 7,
+          "max_hp": 15,
+          "intent": "ATTACK",
+          "move_id": 3,
+          "name": "Louse",
+          "current_hp": 15,
+          "block": 0,
+          "id": "FuzzyLouseDefensive",
+          "powers": [{ "amount": 11, "name": "Curl Up", "id": "Curl Up" }]
+        },
+        {
+          "is_gone": false,
+          "move_hits": 1,
+          "move_base_damage": 6,
+          "half_dead": false,
+          "move_adjusted_damage": 6,
+          "max_hp": 15,
+          "intent": "ATTACK",
+          "move_id": 3,
+          "name": "Louse",
+          "current_hp": 15,
+          "block": 0,
+          "id": "FuzzyLouseNormal",
+          "powers": [{ "amount": 11, "name": "Curl Up", "id": "Curl Up" }]
+        }
+      ],
+      "turn": 1,
+      "limbo": [],
+      "hand": [
+        {
+          "exhausts": false,
+          "is_playable": true,
+          "cost": 1,
+          "name": "Defend",
+          "id": "Defend_R",
+          "type": "SKILL",
+          "ethereal": false,
+          "uuid": "c80a819e-aca1-4ac5-acfb-03f1cb46e392",
+          "upgrades": 0,
+          "rarity": "BASIC",
+          "has_target": false
+        },
+        {
+          "exhausts": false,
+          "is_playable": false,
+          "cost": -2,
+          "name": "Ascender\u0027s Bane",
+          "id": "AscendersBane",
+          "type": "CURSE",
+          "ethereal": true,
+          "uuid": "4af2f1f0-a91a-4bee-b321-c33872f28386",
+          "upgrades": 0,
+          "rarity": "SPECIAL",
+          "has_target": false
+        },
+        {
+          "exhausts": false,
+          "is_playable": true,
+          "cost": 1,
+          "name": "Strike",
+          "id": "Strike_R",
+          "type": "ATTACK",
+          "ethereal": false,
+          "uuid": "179ac88a-4238-4798-bb33-300b149c51f1",
+          "upgrades": 0,
+          "rarity": "BASIC",
+          "has_target": true
+        },
+        {
+          "exhausts": false,
+          "is_playable": true,
+          "cost": 1,
+          "name": "Strike",
+          "id": "Strike_R",
+          "type": "ATTACK",
+          "ethereal": false,
+          "uuid": "f3f31585-b939-42ed-bfc0-134ff4588c72",
+          "upgrades": 0,
+          "rarity": "BASIC",
+          "has_target": true
+        },
+        {
+          "exhausts": false,
+          "is_playable": true,
+          "cost": 1,
+          "name": "Defend",
+          "id": "Defend_R",
+          "type": "SKILL",
+          "ethereal": false,
+          "uuid": "ac759264-d378-4701-8b54-a5a10337c544",
+          "upgrades": 0,
+          "rarity": "BASIC",
+          "has_target": false
+        }
+      ],
+      "player": {
+        "orbs": [],
+        "current_hp": 68,
+        "block": 0,
+        "max_hp": 75,
+        "powers": [{ "amount": 2, "name": "Strength", "id": "Strength" }],
+        "energy": 2
+      }
+    },
+    "keys": { "emerald": false, "ruby": false, "sapphire": false },
+    "deck": [
+      {
+        "exhausts": false,
+        "is_playable": false,
+        "cost": -2,
+        "name": "Ascender\u0027s Bane",
+        "id": "AscendersBane",
+        "type": "CURSE",
+        "ethereal": true,
+        "uuid": "4af2f1f0-a91a-4bee-b321-c33872f28386",
+        "upgrades": 0,
+        "rarity": "SPECIAL",
+        "has_target": false
+      },
+      {
+        "exhausts": false,
+        "is_playable": true,
+        "cost": 1,
+        "name": "Strike",
+        "id": "Strike_R",
+        "type": "ATTACK",
+        "ethereal": false,
+        "uuid": "46bf82a3-6ffd-4d7d-ba35-edded1349a8a",
+        "upgrades": 0,
+        "rarity": "BASIC",
+        "has_target": true
+      },
+      {
+        "exhausts": false,
+        "is_playable": true,
+        "cost": 1,
+        "name": "Strike",
+        "id": "Strike_R",
+        "type": "ATTACK",
+        "ethereal": false,
+        "uuid": "f3f31585-b939-42ed-bfc0-134ff4588c72",
+        "upgrades": 0,
+        "rarity": "BASIC",
+        "has_target": true
+      },
+      {
+        "exhausts": false,
+        "is_playable": true,
+        "cost": 1,
+        "name": "Strike",
+        "id": "Strike_R",
+        "type": "ATTACK",
+        "ethereal": false,
+        "uuid": "6b20f44e-89eb-4ee1-ad25-7ddd49f4b5f1",
+        "upgrades": 0,
+        "rarity": "BASIC",
+        "has_target": true
+      },
+      {
+        "exhausts": false,
+        "is_playable": true,
+        "cost": 1,
+        "name": "Strike",
+        "id": "Strike_R",
+        "type": "ATTACK",
+        "ethereal": false,
+        "uuid": "65a168c4-6880-4c22-9fbe-0359aa04978f",
+        "upgrades": 0,
+        "rarity": "BASIC",
+        "has_target": true
+      },
+      {
+        "exhausts": false,
+        "is_playable": true,
+        "cost": 1,
+        "name": "Strike",
+        "id": "Strike_R",
+        "type": "ATTACK",
+        "ethereal": false,
+        "uuid": "179ac88a-4238-4798-bb33-300b149c51f1",
+        "upgrades": 0,
+        "rarity": "BASIC",
+        "has_target": true
+      },
+      {
+        "exhausts": false,
+        "is_playable": true,
+        "cost": 1,
+        "name": "Defend",
+        "id": "Defend_R",
+        "type": "SKILL",
+        "ethereal": false,
+        "uuid": "a5b98cbf-914d-4405-892e-75455cc13f65",
+        "upgrades": 0,
+        "rarity": "BASIC",
+        "has_target": false
+      },
+      {
+        "exhausts": false,
+        "is_playable": true,
+        "cost": 1,
+        "name": "Defend",
+        "id": "Defend_R",
+        "type": "SKILL",
+        "ethereal": false,
+        "uuid": "c80a819e-aca1-4ac5-acfb-03f1cb46e392",
+        "upgrades": 0,
+        "rarity": "BASIC",
+        "has_target": false
+      },
+      {
+        "exhausts": false,
+        "is_playable": true,
+        "cost": 1,
+        "name": "Defend",
+        "id": "Defend_R",
+        "type": "SKILL",
+        "ethereal": false,
+        "uuid": "ac759264-d378-4701-8b54-a5a10337c544",
+        "upgrades": 0,
+        "rarity": "BASIC",
+        "has_target": false
+      },
+      {
+        "exhausts": false,
+        "is_playable": true,
+        "cost": 1,
+        "name": "Defend",
+        "id": "Defend_R",
+        "type": "SKILL",
+        "ethereal": false,
+        "uuid": "8a155617-a21c-4db5-83d2-78d3f17edaec",
+        "upgrades": 0,
+        "rarity": "BASIC",
+        "has_target": false
+      },
+      {
+        "exhausts": false,
+        "is_playable": true,
+        "cost": 2,
+        "name": "Bash",
+        "id": "Bash",
+        "type": "ATTACK",
+        "ethereal": false,
+        "uuid": "f42c6acc-5a45-4ca1-9200-abe0b674ba93",
+        "upgrades": 0,
+        "rarity": "BASIC",
+        "has_target": true
+      }
+    ],
+    "relics": [
+      { "name": "Burning Blood", "id": "Burning Blood", "counter": -1 }
+    ],
+    "max_hp": 75,
+    "act_boss": "The Guardian",
+    "gold": 99,
+    "action_phase": "WAITING_ON_USER",
+    "act": 1,
+    "screen_name": "NONE",
+    "room_phase": "COMBAT",
+    "is_screen_up": false,
+    "potions": [
+      {
+        "requires_target": false,
+        "can_use": true,
+        "can_discard": true,
+        "name": "Distilled Chaos",
+        "id": "DistilledChaos"
+      },
+      {
+        "requires_target": false,
+        "can_use": true,
+        "can_discard": true,
+        "name": "Block Potion",
+        "id": "Block Potion"
+      }
+    ],
+    "current_hp": 68,
+    "floor": 1,
+    "ascension_level": 20,
+    "class": "IRONCLAD",
+    "map": [
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [
+          { "x": 0, "y": 1 },
+          { "x": 1, "y": 1 }
+        ],
+        "x": 0,
+        "y": 0,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 3, "y": 1 }],
+        "x": 2,
+        "y": 0,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 4, "y": 1 }],
+        "x": 4,
+        "y": 0,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 0, "y": 2 }],
+        "x": 0,
+        "y": 1,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "?",
+        "phrase": "EVENT",
+        "children": [{ "x": 1, "y": 2 }],
+        "x": 1,
+        "y": 1,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "$",
+        "phrase": "COMPLETE",
+        "children": [
+          { "x": 2, "y": 2 },
+          { "x": 3, "y": 2 }
+        ],
+        "x": 3,
+        "y": 1,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [
+          { "x": 3, "y": 2 },
+          { "x": 4, "y": 2 }
+        ],
+        "x": 4,
+        "y": 1,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 1, "y": 3 }],
+        "x": 0,
+        "y": 2,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "?",
+        "phrase": "EVENT",
+        "children": [{ "x": 1, "y": 3 }],
+        "x": 1,
+        "y": 2,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 2, "y": 3 }],
+        "x": 2,
+        "y": 2,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "?",
+        "phrase": "EVENT",
+        "children": [
+          { "x": 2, "y": 3 },
+          { "x": 3, "y": 3 }
+        ],
+        "x": 3,
+        "y": 2,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 3, "y": 3 }],
+        "x": 4,
+        "y": 2,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "$",
+        "phrase": "COMPLETE",
+        "children": [{ "x": 0, "y": 4 }],
+        "x": 1,
+        "y": 3,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [
+          { "x": 2, "y": 4 },
+          { "x": 3, "y": 4 }
+        ],
+        "x": 2,
+        "y": 3,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "$",
+        "phrase": "COMPLETE",
+        "children": [
+          { "x": 3, "y": 4 },
+          { "x": 4, "y": 4 }
+        ],
+        "x": 3,
+        "y": 3,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "?",
+        "phrase": "EVENT",
+        "children": [
+          { "x": 0, "y": 5 },
+          { "x": 1, "y": 5 }
+        ],
+        "x": 0,
+        "y": 4,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 2, "y": 5 }],
+        "x": 2,
+        "y": 4,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "?",
+        "phrase": "EVENT",
+        "children": [
+          { "x": 2, "y": 5 },
+          { "x": 3, "y": 5 }
+        ],
+        "x": 3,
+        "y": 4,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 5, "y": 5 }],
+        "x": 4,
+        "y": 4,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "R",
+        "phrase": "INCOMPLETE",
+        "children": [{ "x": 0, "y": 6 }],
+        "x": 0,
+        "y": 5,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "E",
+        "phrase": "COMBAT",
+        "children": [{ "x": 2, "y": 6 }],
+        "x": 1,
+        "y": 5,
+        "hasEmeraldKey": true,
+        "parents": []
+      },
+      {
+        "symbol": "R",
+        "phrase": "INCOMPLETE",
+        "children": [
+          { "x": 2, "y": 6 },
+          { "x": 3, "y": 6 }
+        ],
+        "x": 2,
+        "y": 5,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "E",
+        "phrase": "COMBAT",
+        "children": [{ "x": 4, "y": 6 }],
+        "x": 3,
+        "y": 5,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "E",
+        "phrase": "COMBAT",
+        "children": [{ "x": 6, "y": 6 }],
+        "x": 5,
+        "y": 5,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "E",
+        "phrase": "COMBAT",
+        "children": [{ "x": 0, "y": 7 }],
+        "x": 0,
+        "y": 6,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "?",
+        "phrase": "EVENT",
+        "children": [
+          { "x": 1, "y": 7 },
+          { "x": 2, "y": 7 }
+        ],
+        "x": 2,
+        "y": 6,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "E",
+        "phrase": "COMBAT",
+        "children": [{ "x": 3, "y": 7 }],
+        "x": 3,
+        "y": 6,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "R",
+        "phrase": "INCOMPLETE",
+        "children": [{ "x": 5, "y": 7 }],
+        "x": 4,
+        "y": 6,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "R",
+        "phrase": "INCOMPLETE",
+        "children": [{ "x": 6, "y": 7 }],
+        "x": 6,
+        "y": 6,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "R",
+        "phrase": "INCOMPLETE",
+        "children": [{ "x": 0, "y": 8 }],
+        "x": 0,
+        "y": 7,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "R",
+        "phrase": "INCOMPLETE",
+        "children": [{ "x": 0, "y": 8 }],
+        "x": 1,
+        "y": 7,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "?",
+        "phrase": "EVENT",
+        "children": [{ "x": 3, "y": 8 }],
+        "x": 2,
+        "y": 7,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "?",
+        "phrase": "EVENT",
+        "children": [{ "x": 3, "y": 8 }],
+        "x": 3,
+        "y": 7,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 5, "y": 8 }],
+        "x": 5,
+        "y": 7,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "E",
+        "phrase": "COMBAT",
+        "children": [{ "x": 6, "y": 8 }],
+        "x": 6,
+        "y": 7,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "T",
+        "phrase": "COMPLETE",
+        "children": [{ "x": 1, "y": 9 }],
+        "x": 0,
+        "y": 8,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "T",
+        "phrase": "COMPLETE",
+        "children": [
+          { "x": 3, "y": 9 },
+          { "x": 4, "y": 9 }
+        ],
+        "x": 3,
+        "y": 8,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "T",
+        "phrase": "COMPLETE",
+        "children": [{ "x": 6, "y": 9 }],
+        "x": 5,
+        "y": 8,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "T",
+        "phrase": "COMPLETE",
+        "children": [{ "x": 6, "y": 9 }],
+        "x": 6,
+        "y": 8,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [
+          { "x": 1, "y": 10 },
+          { "x": 2, "y": 10 }
+        ],
+        "x": 1,
+        "y": 9,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 2, "y": 10 }],
+        "x": 3,
+        "y": 9,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "?",
+        "phrase": "EVENT",
+        "children": [{ "x": 3, "y": 10 }],
+        "x": 4,
+        "y": 9,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [
+          { "x": 5, "y": 10 },
+          { "x": 6, "y": 10 }
+        ],
+        "x": 6,
+        "y": 9,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 1, "y": 11 }],
+        "x": 1,
+        "y": 10,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "?",
+        "phrase": "EVENT",
+        "children": [
+          { "x": 2, "y": 11 },
+          { "x": 3, "y": 11 }
+        ],
+        "x": 2,
+        "y": 10,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 3, "y": 11 }],
+        "x": 3,
+        "y": 10,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 5, "y": 11 }],
+        "x": 5,
+        "y": 10,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "E",
+        "phrase": "COMBAT",
+        "children": [{ "x": 6, "y": 11 }],
+        "x": 6,
+        "y": 10,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 0, "y": 12 }],
+        "x": 1,
+        "y": 11,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 3, "y": 12 }],
+        "x": 2,
+        "y": 11,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "?",
+        "phrase": "EVENT",
+        "children": [
+          { "x": 3, "y": 12 },
+          { "x": 4, "y": 12 }
+        ],
+        "x": 3,
+        "y": 11,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "E",
+        "phrase": "COMBAT",
+        "children": [{ "x": 4, "y": 12 }],
+        "x": 5,
+        "y": 11,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "R",
+        "phrase": "INCOMPLETE",
+        "children": [{ "x": 6, "y": 12 }],
+        "x": 6,
+        "y": 11,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "?",
+        "phrase": "EVENT",
+        "children": [{ "x": 1, "y": 13 }],
+        "x": 0,
+        "y": 12,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [
+          { "x": 3, "y": 13 },
+          { "x": 4, "y": 13 }
+        ],
+        "x": 3,
+        "y": 12,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "?",
+        "phrase": "EVENT",
+        "children": [{ "x": 5, "y": 13 }],
+        "x": 4,
+        "y": 12,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 5, "y": 13 }],
+        "x": 6,
+        "y": 12,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 2, "y": 14 }],
+        "x": 1,
+        "y": 13,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 2, "y": 14 }],
+        "x": 3,
+        "y": 13,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [{ "x": 3, "y": 14 }],
+        "x": 4,
+        "y": 13,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "M",
+        "phrase": "COMBAT",
+        "children": [
+          { "x": 4, "y": 14 },
+          { "x": 6, "y": 14 }
+        ],
+        "x": 5,
+        "y": 13,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "R",
+        "phrase": "INCOMPLETE",
+        "children": [{ "x": 3, "y": 16 }],
+        "x": 2,
+        "y": 14,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "R",
+        "phrase": "INCOMPLETE",
+        "children": [{ "x": 3, "y": 16 }],
+        "x": 3,
+        "y": 14,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "R",
+        "phrase": "INCOMPLETE",
+        "children": [{ "x": 3, "y": 16 }],
+        "x": 4,
+        "y": 14,
+        "hasEmeraldKey": false,
+        "parents": []
+      },
+      {
+        "symbol": "R",
+        "phrase": "INCOMPLETE",
+        "children": [{ "x": 3, "y": 16 }],
+        "x": 6,
+        "y": 14,
+        "hasEmeraldKey": false,
+        "parents": []
+      }
+    ],
+    "room_type": "MonsterRoom"
+  }
+}

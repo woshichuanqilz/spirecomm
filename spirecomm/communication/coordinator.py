@@ -30,6 +30,7 @@ def replace_content(text):
     pattern = r'^[^{]*({)'
     replacement = '{'
     result = re.sub(pattern, replacement, text)
+    result = re.sub('{+', '{', result)
     return result
 
 
@@ -46,6 +47,7 @@ def read_stdin(input_queue):
             print('recv begin...')
             while True:
                 recv_s = replace_content(s.recv(16384).decode('latin-1').strip())
+                # replace
                 input_queue.put(recv_s)
     else:
         while True:
@@ -250,6 +252,7 @@ class Coordinator:
         :return: True if the game was a victory, else False
         :rtype: bool
         """
+        seed = '2CKZVK1A63HKP'
         self.clear_actions()
         while not self.game_is_ready:
             self.receive_game_state_update(block=True, perform_callbacks=False)
