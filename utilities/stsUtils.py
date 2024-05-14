@@ -83,5 +83,6 @@ class GetPaths:
 if __name__ == '__main__':
     k = GetPaths()
     paths = k.getAllPaths()
-    pe = PathEvaluator((0, 0), paths)
-    print(pe.get_best_path())
+    path_eval = PathEvaluator((0, 0), paths)
+    bps = path_eval.get_best_path()
+    print(bps)

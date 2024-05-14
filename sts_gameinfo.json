@@ -7,13 +7,23 @@
       "blood_for_blood",
       "rupture"
     ],
-    "benefit_for_exhaust": ["dark_embrace", "feel_no_pain"],
+    "benefit_for_exhaust": [
+      "dark_embrace",
+      "feel_no_pain"
+    ],
     "benefit_for_self_harm": {
-      "cards": ["pain_curse", "apparition"],
-      "relic": ["tungsten_rod"]
+      "cards": [
+        "pain_curse",
+        "apparition"
+      ],
+      "relic": [
+        "tungsten_rod"
+      ]
     },
-    "add_status_card": ["relic医药箱"],
-    "benefit_by_strength": [],
+    "add_status_card": [
+      "relic医药箱"
+    ],
+    "benefit_by_strength": []
   },
   "relic_combo": {
     "necronomicon": []
@@ -1036,7 +1046,7 @@
         "half-final"
       ],
       "features": [
-        "self_harm",
+        "self_harm"
       ],
       "benefit_for": {
         "case": [
@@ -1044,7 +1054,10 @@
         ]
       },
       "benefitted_by": {
-        "cards": ["rupture", "blood_for_blood"]
+        "cards": [
+          "rupture",
+          "blood_for_blood"
+        ]
       }
     },
     {
@@ -1067,7 +1080,7 @@
         "half-final"
       ],
       "features": [
-        "exhaust",
+        "exhaust"
       ],
       "benefit_for": {
         "case": [
@@ -1075,7 +1088,9 @@
         ]
       },
       "benefitted_by": {
-        "cards": ["need_exhaust"]
+        "cards": [
+          "need_exhaust"
+        ]
       }
     },
     {
@@ -1097,7 +1112,7 @@
         "half-final"
       ],
       "features": [
-        "gain_strength",
+        "gain_strength"
       ],
       "benefit_for": {
         "case": []
@@ -1126,7 +1141,7 @@
         "half-final"
       ],
       "features": [
-        "exhaust",
+        "exhaust"
       ],
       "benefit_for": {
         "case": [
@@ -1134,7 +1149,9 @@
         ]
       },
       "benefitted_by": {
-        "cards": ["need_exhaust"]
+        "cards": [
+          "need_exhaust"
+        ]
       }
     },
     {
@@ -1157,7 +1174,7 @@
         "temp"
       ],
       "features": [
-        "gain_block",
+        "gain_block"
       ],
       "benefit_for": {
         "case": []
@@ -1185,13 +1202,17 @@
         "final"
       ],
       "features": [
-        "gain_block", "add_status_card", "add_wound"
+        "gain_block",
+        "add_status_card",
+        "add_wound"
       ],
       "benefit_for": {
         "case": []
       },
       "benefitted_by": {
-        "cards": ["evolve"],
+        "cards": [
+          "evolve"
+        ]
       }
     },
     {
@@ -1217,7 +1238,7 @@
         "case": []
       },
       "benefitted_by": {
-        "cards": [],
+        "cards": []
       }
     },
     {
@@ -1238,12 +1259,18 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["gain_block"],
+      "features": [
+        "gain_block"
+      ],
       "benefit_for": {
         "case": []
       },
       "benefitted_by": {
-        "cards": ["blood_for_blood", "dropkick", "body_slam"],
+        "cards": [
+          "blood_for_blood",
+          "dropkick",
+          "body_slam"
+        ]
       }
     },
     {
@@ -1267,10 +1294,12 @@
       ],
       "features": [],
       "benefit_for": {
-        "case": ["remove_cards_from_deck", "draw_cards"]
+        "case": [
+          "remove_cards_from_deck",
+          "draw_cards"
+        ]
       },
-      "benefitted_by": {
-      }
+      "benefitted_by": {}
     },
     {
       "name": "reckless_charge",
@@ -1290,17 +1319,26 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["add_status_card", "add_dazed", "exhaust"],
+      "features": [
+        "add_status_card",
+        "add_dazed",
+        "exhaust"
+      ],
       "change_card_pile": {
         "pile_type": "draw_pile",
         "change_type": "add",
         "count": 1
       },
       "benefit_for": {
-        "cards": ["dark_embrace"]
+        "cards": [
+          "dark_embrace"
+        ]
       },
       "benefitted_by": {
-        "case": ["remove_cards_from_deck", "draw_cards"]
+        "case": [
+          "remove_cards_from_deck",
+          "draw_cards"
+        ]
       }
     },
     {
@@ -1321,12 +1359,18 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["gain_strength"],
+      "features": [
+        "gain_strength"
+      ],
       "benefit_for": {
-        "cards": ["dark_embrace"]
+        "cards": [
+          "dark_embrace"
+        ]
       },
       "benefitted_by": {
-        "case": ["self_harm"]
+        "case": [
+          "self_harm"
+        ]
       }
     },
     {
@@ -1348,10 +1392,11 @@
         "final"
       ],
       "features": [],
-      "benefit_for": {
-      },
+      "benefit_for": {},
       "benefitted_by": {
-        "case": ["upgrade"]
+        "case": [
+          "upgrade"
+        ]
       }
     },
     {
@@ -1372,13 +1417,22 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["exhaust", "gain_block", "big_exhaust"],
+      "features": [
+        "exhaust",
+        "gain_block",
+        "big_exhaust"
+      ],
       "benefit_for": {
-        "case": ["need_block", "need_exhaust"]
+        "case": [
+          "need_block",
+          "need_exhaust"
+        ]
       },
       "benefitted_by": {}
     },
-    {"name": "sentinel"},
+    {
+      "name": "sentinel"
+    },
     {
       "name": "sever_soul",
       "cn_name": "断魂斩",
@@ -1397,7 +1451,10 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["exhaust", "big_exhaust"],
+      "features": [
+        "exhaust",
+        "big_exhaust"
+      ],
       "benefit_for": {},
       "benefitted_by": {}
     },
@@ -1419,9 +1476,15 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["exhaust", "weaken", "vulnerable"],
+      "features": [
+        "exhaust",
+        "weaken",
+        "vulnerable"
+      ],
       "benefit_for": {
-        "cards": ["dropkick"]
+        "cards": [
+          "dropkick"
+        ]
       },
       "benefitted_by": {}
     },
@@ -1443,7 +1506,9 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["gain_strength"],
+      "features": [
+        "gain_strength"
+      ],
       "benefit_for": {},
       "benefitted_by": {}
     },
@@ -1465,7 +1530,10 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["weaken", "vulnerable"],
+      "features": [
+        "weaken",
+        "vulnerable"
+      ],
       "benefit_for": {},
       "benefitted_by": {}
     },
@@ -1487,7 +1555,10 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["attack_multi_times", "x_times"],
+      "features": [
+        "attack_multi_times",
+        "x_times"
+      ],
       "benefit_for": {},
       "benefitted_by": {}
     },
@@ -1512,7 +1583,9 @@
       "features": [],
       "benefit_for": {},
       "benefitted_by": {
-        "cards": ["entrench"]
+        "cards": [
+          "entrench"
+        ]
       }
     },
     {
@@ -1533,7 +1606,9 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["gain_energy"],
+      "features": [
+        "gain_energy"
+      ],
       "benefit_for": {},
       "benefitted_by": {}
     },
@@ -1580,7 +1655,11 @@
         "final"
       ],
       "features": [],
-      "benefit_for": {"case": ["need_self_harm"]},
+      "benefit_for": {
+        "case": [
+          "need_self_harm"
+        ]
+      },
       "benefitted_by": {}
     },
     {
@@ -1602,8 +1681,15 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["zero_cost", "exhaust"],
-      "benefit_for": {"case": ["low_energy"]},
+      "features": [
+        "zero_cost",
+        "exhaust"
+      ],
+      "benefit_for": {
+        "case": [
+          "low_energy"
+        ]
+      },
       "benefitted_by": {}
     },
     {
@@ -1625,7 +1711,9 @@
       "deck_construct": [
         "half-final"
       ],
-      "features": ["gain_strength"],
+      "features": [
+        "gain_strength"
+      ],
       "benefit_for": {},
       "benefitted_by": {}
     },
@@ -1635,7 +1723,7 @@
       "pick": {
         "score": 5,
         "limit": {
-          "count": 1,
+          "count": 1
         }
       },
       "upgrade": {
@@ -1648,7 +1736,11 @@
         "half-final"
       ],
       "features": [],
-      "benefit_for": {"case": ["high_quality_attack"]},
+      "benefit_for": {
+        "case": [
+          "high_quality_attack"
+        ]
+      },
       "benefitted_by": {}
     },
     {
@@ -1657,7 +1749,7 @@
       "pick": {
         "score": 5,
         "limit": {
-          "count": 1,
+          "count": 1
         }
       },
       "upgrade": {
@@ -1669,8 +1761,15 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["exhaust"],
-      "benefit_for": {"cards": ["offering", "feed"]},
+      "features": [
+        "exhaust"
+      ],
+      "benefit_for": {
+        "cards": [
+          "offering",
+          "feed"
+        ]
+      },
       "benefitted_by": {}
     },
     {
@@ -1692,7 +1791,9 @@
       "deck_construct": [
         "half-final"
       ],
-      "features": ["exhaust"],
+      "features": [
+        "exhaust"
+      ],
       "benefit_for": {},
       "benefitted_by": {}
     },
@@ -1714,7 +1815,10 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["exhaust", "big_exhaust"],
+      "features": [
+        "exhaust",
+        "big_exhaust"
+      ],
       "benefit_for": {},
       "benefitted_by": {}
     },
@@ -1725,7 +1829,7 @@
         "score": 6,
         "limit": {
           "count": 1,
-          "act": 1.5,
+          "act": 1.5
         }
       },
       "upgrade": {
@@ -1737,7 +1841,10 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["add_status_card", "add_burn"],
+      "features": [
+        "add_status_card",
+        "add_burn"
+      ],
       "benefit_for": {},
       "benefitted_by": {}
     },
@@ -1748,7 +1855,7 @@
         "score": 6,
         "limit": {
           "count": 1,
-          "act": 1.5,
+          "act": 1.5
         }
       },
       "upgrade": {
@@ -1760,7 +1867,10 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["gain_block", "exhaust"],
+      "features": [
+        "gain_block",
+        "exhaust"
+      ],
       "benefit_for": {},
       "benefitted_by": {}
     },
@@ -1804,9 +1914,15 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["gain_strength"],
+      "features": [
+        "gain_strength"
+      ],
       "benefit_for": {},
-      "benefitted_by": {"case": ["gain_strength"]}
+      "benefitted_by": {
+        "case": [
+          "gain_strength"
+        ]
+      }
     },
     {
       "name": "offering",
@@ -1826,7 +1942,10 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["self_harm", "gain_energy"],
+      "features": [
+        "self_harm",
+        "gain_energy"
+      ],
       "benefit_for": {},
       "benefitted_by": {}
     },
@@ -1848,9 +1967,35 @@
       "deck_construct": [
         "final"
       ],
-      "features": ["heal"],
+      "features": [
+        "heal"
+      ],
       "benefit_for": {},
-      "benefitted_by": {"case": ["gain_strength"]}
-    },
-  ]
+      "benefitted_by": {
+        "case": [
+          "gain_strength"
+        ]
+      }
+    }
+  ],
+  "Elite": {
+    "HpConsumption": 20,
+    "Profit": 5
+  },
+  "Elite with Fire": {
+    "HpConsumption": 30,
+    "Profit": 8
+  },
+  "Question Mark": {
+    "HpConsumption": 3,
+    "Profit": 0.8
+  },
+  "Monster": {
+    "HpConsumption": 10,
+    "Profit": 1
+  },
+  "Shop": {
+    "HpConsumption": 0,
+    "Profit": 4
+  }
 }
