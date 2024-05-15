@@ -1978,24 +1978,71 @@
       }
     }
   ],
-  "Elite": {
-    "HpConsumption": 20,
-    "Profit": 5
+  "map": {
+    "room_type": {
+      "elite": {
+        "hp_consumption": -20,
+        "profit": 5
+      },
+      "elite_with_fire": {
+        "hp_consumption": -30,
+        "profit": 8
+      },
+      "question_mark": {
+        "hp_consumption": -3,
+        "profit": 0.8
+      },
+      "monster": {
+        "hp_consumption": -10,
+        "profit": 1
+      },
+      "campfire": {
+        "hp_consumption": 10,
+        "profit": 5
+      },
+      "treasure": {
+        "hp_consumption": 0,
+        "profit": 5
+      },
+      "shop": {
+        "hp_consumption": 0,
+        "profit": 4
+      }
+    }
   },
-  "Elite with Fire": {
-    "HpConsumption": 30,
-    "Profit": 8
-  },
-  "Question Mark": {
-    "HpConsumption": 3,
-    "Profit": 0.8
-  },
-  "Monster": {
-    "HpConsumption": 10,
-    "Profit": 1
-  },
-  "Shop": {
-    "HpConsumption": 0,
-    "Profit": 4
+  "events": {
+    "neow_event": {
+      "1st_blessing": {
+        "remove a card": 2,
+        "transform a card": 1,
+        "upgrade a card": 5,
+        "choose a card to obtain": 7,
+        "choose an uncommon colorless card to obtain": 3,
+        "obtain a random rare card": 3
+      },
+      "2nd_blessing": {
+        "max hp +8": 1,
+        "enemies in the next three combat will have one health": 7,
+        "obtain a random common relic": 7,
+        "receive 100 gold": 9,
+        "obtain 3 potions": 1
+      },
+      "3rd_blessing": {
+        "disadvantages": {
+          "lose maxh health": -2,
+          "take damage": -5,
+          "obtain a curse": -5,
+          "lose all gold": -3
+        },
+        "advantages": {
+          "remove 2 cards": 10,
+          "transform 2 cards": 5,
+          "gain 250 gold": 15,
+          "choose a rare card to obtain": 10,
+          "obtain a random rare relic": 12,
+          "max hp + 16": 8
+        }
+      }
+    }
   }
 }

@@ -1,4 +1,5 @@
 import json
+from sts_config import STS_Config
 
 
 def getNodeByXY(x, y, all_nodes):
@@ -31,9 +32,59 @@ class PathEvaluator:
     def __init__(self, cur_pos, paths):
         self.paths = paths
         self.cur_pos = cur_pos
+        self.map_conf = STS_Config['map']
 
-    def get_best_path(self):
-        result = []
+    def calc_path_score(self, path, game_state):
+        score = 0
+        current_hp = game_state['current_hp']
+        gold = game_state['gold']
+        for node in path:
+            if node['symbol'] == 'M':
+                score += self.map_conf['room_type']['monster']['profit']
+                current_hp += self.map_conf['room_type']['monster']['hp_consumption']
+            elif node['symbol'] == 'R':
+                score += self.map_conf['room_type']['campfire']['profit']
+                current_hp += self.map_conf['room_type']['campfire']['hp_consumption']
+            elif node['symbol'] == '?':
+                score += self.map_conf['room_type']['question_mark']['profit']
+                current_hp += self.map_conf['room_type']['question_mark']['hp_consumption']
+            elif node['symbol'] == '$':  # shop
+                if gold < 75:
+                    profit = 0
+                elif 75 <= gold < 120:
+                    profit = 2
+                elif 120 <= gold < 180:
+                    profit = 4
+                elif 180 <= gold < 230:
+                    profit = 5
+                else:
+                    profit = 7
+                score += profit
+                current_hp += self.map_conf['room_type']['shop']['hp_consumption']
+            elif node['symbol'] == 'T':
+                score += self.map_conf['room_type']['treasure']['profit']
+                current_hp += self.map_conf['room_type']['treasure']['hp_consumption']
+            elif node['symbol'] == 'E':
+                if node['hasEmeraldKey']:
+                    score += self.map_conf['room_type']['elite_with_fire']['profit']
+                    current_hp += self.map_conf['room_type']['elite_with_fire']['hp_consumption']
+                else:
+                    score += self.map_conf['room_type']['elite']['profit']
+                    current_hp += self.map_conf['room_type']['elite']['hp_consumption']
+            elif node['symbol'] == 'B':
+                pass
+            else:
+                # throw error
+                print(node['symbol'])
+                raise Exception('Unknown symbol')
+        return {
+            "score": score,
+            "hp": current_hp,
+            "path": path
+        }
+
+    def get_best_path(self, game_state):
+        path_with_2e2r = []
         for path in self.paths:
             elite_count = 0
             campfire_count = 0
@@ -43,8 +94,15 @@ class PathEvaluator:
                 if node['symbol'] == 'R':
                     campfire_count += 1
             if elite_count >= 2 and campfire_count >= 2:
-                result.append(path)
-        return result
+                path_with_2e2r.append(path)
+        path_with_score = []
+        for p in path_with_2e2r:
+            path_with_score.append(self.calc_path_score(p, game_state))
+        # remove path with hp < 0
+        path_with_score = [p for p in path_with_score if p['hp'] >= 0]
+        # sort by score
+        path_with_score.sort(key=lambda x: x['score'], reverse=True)
+        return path_with_score[0]
 
 
 class GetPaths:
@@ -68,7 +126,7 @@ class GetPaths:
             "children": [],
             "x": 3,
             "y": 16,
-            "hasEmeraldKey": False,
+            "hasemeraldkey": False,
             "parents": []
         }
         sts_map = game_state['game_state']['map']
@@ -84,5 +142,7 @@ if __name__ == '__main__':
     k = GetPaths()
     paths = k.getAllPaths()
     path_eval = PathEvaluator((0, 0), paths)
-    bps = path_eval.get_best_path()
-    print(bps)
+    bps = path_eval.get_best_path({'player': {
+        'current_hp': 75
+    }})
+    print('done')
