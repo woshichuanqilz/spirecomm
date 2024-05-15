@@ -1979,34 +1979,60 @@
     }
   ],
   "map": {
+    "keyword_map": {
+      "M": "monster",
+      "R": "campfire",
+      "?": "question_mark",
+      "$": "shop",
+      "T": "treasure",
+      "E": "elite",
+      "B": "boss"
+    },
+    "end_node": {
+      "symbol": "B",
+      "phrase": "INCOMPLETE",
+      "children": [],
+      "x": 3,
+      "y": 16,
+      "hasemeraldkey": false,
+      "parents": []
+    },
     "room_type": {
       "elite": {
         "hp_consumption": -20,
-        "profit": 5
+        "profit": 5,
+        "symbol": "E"
       },
       "elite_with_fire": {
         "hp_consumption": -30,
-        "profit": 8
+        "profit": 8,
+        "symbol": "E"
       },
       "question_mark": {
         "hp_consumption": -3,
-        "profit": 0.8
+        "profit": 0.8,
+        "symbol": "?"
       },
       "monster": {
         "hp_consumption": -10,
-        "profit": 1
+        "hp_consumption_act1_first3": 4,
+        "profit": 1,
+        "symbol": "M"
       },
       "campfire": {
         "hp_consumption": 10,
-        "profit": 5
+        "profit": 5,
+        "symbol": "R"
       },
       "treasure": {
         "hp_consumption": 0,
-        "profit": 5
+        "profit": 5,
+        "symbol": "T"
       },
       "shop": {
         "hp_consumption": 0,
-        "profit": 4
+        "profit": 4,
+        "symbol": "$"
       }
     }
   },
@@ -2040,7 +2066,7 @@
           "gain 250 gold": 15,
           "choose a rare card to obtain": 10,
           "obtain a random rare relic": 12,
-          "max hp + 16": 8
+          "max hp +16": 8
         }
       }
     }

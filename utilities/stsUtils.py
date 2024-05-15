@@ -29,25 +29,40 @@ def find_paths(start_nodes, all_nodes):
 
 
 class PathEvaluator:
-    def __init__(self, cur_pos, paths):
-        self.paths = paths
-        self.cur_pos = cur_pos
+    def __init__(self, game_state):
+        self.game_state = game_state
+        self.count_dict = {}
+        self.paths_info = []
         self.map_conf = STS_Config['map']
+        self.choice_list = game_state['game_state']['choice_list']
+        self.getAllPaths()
 
-    def calc_path_score(self, path, game_state):
+    def choice_bonus(self):
+        for path in self.paths_info:
+            if 'receive 100 gold' == self.choice_list[1] or 'gain 250 gold' in self.choice_list[2]:
+                pass
+
+    def get_best_path(self):
+        for path in self.paths_info:
+            self.calc_path_score(path)
+        print('hello')
+
+    def calc_path_score(self, path):
         score = 0
-        current_hp = game_state['current_hp']
-        gold = game_state['gold']
+        current_hp = self.game_state['game_state']['current_hp']
+        gold = self.game_state['game_state']['gold']
+        monster_room_count = 0
+        keyword_map = self.map_conf['keyword_map']
         for node in path:
+            kw = keyword_map[node['symbol']]
             if node['symbol'] == 'M':
                 score += self.map_conf['room_type']['monster']['profit']
-                current_hp += self.map_conf['room_type']['monster']['hp_consumption']
-            elif node['symbol'] == 'R':
-                score += self.map_conf['room_type']['campfire']['profit']
-                current_hp += self.map_conf['room_type']['campfire']['hp_consumption']
-            elif node['symbol'] == '?':
-                score += self.map_conf['room_type']['question_mark']['profit']
-                current_hp += self.map_conf['room_type']['question_mark']['hp_consumption']
+                if self.game_state['game_state']['act'] == 1:
+                    if monster_room_count <= 3:
+                        current_hp += self.map_conf['room_type'][kw]['hp_consumption']
+                    else:
+                        current_hp += self.map_conf['room_type'][kw]['hp_consumption_act1_first3']
+                monster_room_count += 1
             elif node['symbol'] == '$':  # shop
                 if gold < 75:
                     profit = 0
@@ -60,17 +75,17 @@ class PathEvaluator:
                 else:
                     profit = 7
                 score += profit
-                current_hp += self.map_conf['room_type']['shop']['hp_consumption']
-            elif node['symbol'] == 'T':
-                score += self.map_conf['room_type']['treasure']['profit']
-                current_hp += self.map_conf['room_type']['treasure']['hp_consumption']
+                current_hp += self.map_conf['room_type'][kw]['hp_consumption']
             elif node['symbol'] == 'E':
                 if node['hasEmeraldKey']:
                     score += self.map_conf['room_type']['elite_with_fire']['profit']
                     current_hp += self.map_conf['room_type']['elite_with_fire']['hp_consumption']
                 else:
-                    score += self.map_conf['room_type']['elite']['profit']
-                    current_hp += self.map_conf['room_type']['elite']['hp_consumption']
+                    score += self.map_conf['room_type'][kw]['profit']
+                    current_hp += self.map_conf['room_type'][kw]['hp_consumption']
+            elif node['symbol'] in ['R', '?', 'T']:
+                score += self.map_conf['room_type'][kw]['profit']
+                current_hp += self.map_conf['room_type'][kw]['hp_consumption']
             elif node['symbol'] == 'B':
                 pass
             else:
@@ -79,70 +94,91 @@ class PathEvaluator:
                 raise Exception('Unknown symbol')
         return {
             "score": score,
-            "hp": current_hp,
-            "path": path
+            "hp": current_hp
         }
-
-    def get_best_path(self, game_state):
-        path_with_2e2r = []
-        for path in self.paths:
-            elite_count = 0
-            campfire_count = 0
-            for node in path:
-                if node['symbol'] == 'E':
-                    elite_count += 1
-                if node['symbol'] == 'R':
-                    campfire_count += 1
-            if elite_count >= 2 and campfire_count >= 2:
-                path_with_2e2r.append(path)
-        path_with_score = []
-        for p in path_with_2e2r:
-            path_with_score.append(self.calc_path_score(p, game_state))
-        # remove path with hp < 0
-        path_with_score = [p for p in path_with_score if p['hp'] >= 0]
-        # sort by score
-        path_with_score.sort(key=lambda x: x['score'], reverse=True)
-        return path_with_score[0]
-
-
-class GetPaths:
-    paths = []
-
-    def getPath(self, start_node, cur_path, all_nodes):
-        for pos in start_node['children']:
-            print(pos['x'], pos['y'])
-            node = getNodeByXY(pos['x'], pos['y'], all_nodes)
-            if pos['y'] == 16:
-                self.paths.append(cur_path + [node])
-            else:
-                return self.getPath(node, (cur_path + [node]).copy(), all_nodes)
 
     def getAllPaths(self):
-        with open('../tmp.json', encoding='utf-8') as f:
-            game_state = json.load(f)
-        end_node = {
-            "symbol": "B",
-            "phrase": "INCOMPLETE",
-            "children": [],
-            "x": 3,
-            "y": 16,
-            "hasemeraldkey": False,
-            "parents": []
-        }
-        sts_map = game_state['game_state']['map']
+        end_node = STS_Config['map']['end_node']
+        sts_map = self.game_state['game_state']['map']
         sts_map.append(end_node)
         # get all node with y = 0
         start_nodes = [node for node in sts_map if node['y'] == 0]
-        self.paths = find_paths(start_nodes, sts_map)
+        tmp_paths = find_paths(start_nodes, sts_map)
+        for path in tmp_paths:
+            tmp_dict = {'path': path}
+            monster_count_before_first_elite = 0
+            is_first_elite_appear = False
+            for node in path:
+                key = str(node['x']) + '-' + str(node['y'])
+                if key in self.count_dict and node['y'] <= 6:
+                    self.count_dict[key] += 1
+                else:
+                    self.count_dict[key] = 1
+                if node['symbol'] == 'E' and not is_first_elite_appear:
+                    is_first_elite_appear = True
+                    tmp_dict['monster_count_before_first_elite'] = monster_count_before_first_elite
+                if node['symbol'] == 'M' and not is_first_elite_appear:
+                    monster_count_before_first_elite += 1
 
-        return self.paths
+            # dict extend
+            basic_info = self.basicProcessPath(path)
+            if basic_info['elite_count'] < 2 or basic_info['campfire_count'] < 2:
+                continue
+            score_tmp_dict = self.calc_path_score(path)
+            print(score_tmp_dict)
+            self.paths_info.append({
+                **tmp_dict,
+                **score_tmp_dict,
+                **basic_info
+            })
+
+        return self.paths_info
+
+    def basicProcessPath(self, path):
+        # count elite and campfire
+        elite_count = 0
+        campfire_count = 0
+        for node in path:
+            if node['symbol'] == 'E':
+                elite_count += 1
+            if node['symbol'] == 'R':
+                campfire_count += 1
+        # index of first store
+        store_index = -1
+        for i, node in enumerate(path):
+            if node['symbol'] == '$':
+                store_index = i
+                break
+        # if store before the first elite
+        store_before_first_elite = False
+        if store_index != -1:
+            for i, node in enumerate(path):
+                if node['symbol'] == 'E':
+                    if i < store_index:
+                        store_before_first_elite = True
+                        break
+        # if campfire before the first elite
+        campfire_before_first_elite = False
+        if store_index != -1:
+            for i, node in enumerate(path):
+                if node['symbol'] == 'E':
+                    if i < store_index:
+                        campfire_before_first_elite = True
+                        break
+
+        return {
+            "elite_count": elite_count,
+            "campfire_count": campfire_count,
+            "store_index": store_index,
+            "store_before_first_elite": store_before_first_elite,
+            "campfire_before_first_elite": campfire_before_first_elite
+        }
 
 
 if __name__ == '__main__':
-    k = GetPaths()
-    paths = k.getAllPaths()
-    path_eval = PathEvaluator((0, 0), paths)
-    bps = path_eval.get_best_path({'player': {
-        'current_hp': 75
-    }})
+    # k = PathEvaluator()
+    # paths = k.getAllPaths()
+    with open('../game_state.json', encoding='utf-8') as f:
+        gs = json.load(f)
+    path_eval = PathEvaluator(gs)
     print('done')
