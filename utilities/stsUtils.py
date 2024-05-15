@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 from sts_config import STS_Config
 
@@ -34,18 +35,35 @@ class PathEvaluator:
         self.count_dict = {}
         self.paths_info = []
         self.map_conf = STS_Config['map']
-        self.choice_list = game_state['game_state']['choice_list']
+        self.choice_list = [x.lower() for x in game_state['game_state']['choice_list']]
         self.getAllPaths()
 
     def choice_bonus(self):
-        for path in self.paths_info:
-            if 'receive 100 gold' == self.choice_list[1] or 'gain 250 gold' in self.choice_list[2]:
-                pass
-
-    def get_best_path(self):
-        for path in self.paths_info:
-            self.calc_path_score(path)
-        print('hello')
+        for path_info in self.paths_info:
+            # gold related
+            tmp_dict = {}
+            if 'gain 250 gold' in self.choice_list[2]:
+                tmp_dict = {'choice_bonus_type': 'gain 250 gold'}
+                if path_info['store_before_first_elite']:
+                    tmp_score = 4
+                    if 'obtain a curse' in self.choice_list[2]:
+                        tmp_score += 2
+                    tmp_dict['choice_bonus_score'] = tmp_score
+                elif path_info['store_index'] >= 7:
+                    tmp_dict['choice_bonus_score'] = -5
+            elif 'receive 100 gold' == self.choice_list[1]:
+                tmp_dict = {'choice_bonus_type': 'receive 100 gold'}
+                if path_info['store_before_first_elite']:
+                    tmp_dict['choice_bonus_score'] = 4
+                elif path_info['store_index'] >= 7:
+                    tmp_dict['choice_bonus_score'] = -5
+            if tmp_dict:
+                path_info['choice_bonus'] = [tmp_dict]
+            # neow's lament
+            if path_info['monster_count_before_first_elite'] < 3:
+                tmp_dict['choice_bonus_score'] = 5
+                tmp_dict['choice_bonus_type'] = 'neow\'s lament'
+                path_info['choice_bonus'].append(tmp_dict)
 
     def calc_path_score(self, path):
         score = 0
@@ -104,16 +122,20 @@ class PathEvaluator:
         # get all node with y = 0
         start_nodes = [node for node in sts_map if node['y'] == 0]
         tmp_paths = find_paths(start_nodes, sts_map)
+
         for path in tmp_paths:
             tmp_dict = {'path': path}
             monster_count_before_first_elite = 0
             is_first_elite_appear = False
             for node in path:
-                key = str(node['x']) + '-' + str(node['y'])
-                if key in self.count_dict and node['y'] <= 6:
-                    self.count_dict[key] += 1
-                else:
-                    self.count_dict[key] = 1
+                # 计算出现频率最多的点
+                if 4 <= node['y'] <= 14:
+                    key = str(node['x']) + '-' + str(node['y'])
+                    if key in self.count_dict and node['y'] <= 6:
+                        self.count_dict[key] += 1
+                    else:
+                        self.count_dict[key] = 1
+                # 计算第一个精英怪出现前的怪物数量
                 if node['symbol'] == 'E' and not is_first_elite_appear:
                     is_first_elite_appear = True
                     tmp_dict['monster_count_before_first_elite'] = monster_count_before_first_elite
@@ -126,11 +148,27 @@ class PathEvaluator:
                 continue
             score_tmp_dict = self.calc_path_score(path)
             print(score_tmp_dict)
+            # before first elite
+            if basic_info['store_before_first_elite'] or basic_info['campfire_before_first_elite']:
+                score_tmp_dict['score'] += 3
+
             self.paths_info.append({
                 **tmp_dict,
                 **score_tmp_dict,
                 **basic_info
             })
+        # sort self.count_dict by value and get top 5 items
+        self.count_dict = dict(sorted(self.count_dict.items(), key=lambda x: x[1], reverse=True)[:5])
+        tmp_sum = 0
+        for key in self.count_dict:
+            tmp_sum += self.count_dict[key]
+        avg = tmp_sum / len(self.count_dict)
+
+        for path_info in self.paths_info:
+            for node in path_info['path']:
+                key = str(node['x']) + '-' + str(node['y'])
+                if key in self.count_dict:
+                    path_info['score'] += self.count_dict.get(key, 0) / avg
 
         return self.paths_info
 
