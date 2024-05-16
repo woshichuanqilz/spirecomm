@@ -14,7 +14,7 @@
       "upgrade a card",
       "obtain 3 random potions",
       "lose all gold choose a rare colorless card to obtain",
-      "lose your starting relic obtain a random boss relic"
+      "lose your startin obtain a random boss relic"
     ],
     "screen_type": "EVENT",
     "screen_state": {

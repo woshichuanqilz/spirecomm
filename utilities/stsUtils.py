@@ -58,12 +58,13 @@ class PathEvaluator:
         self.paths_info = []
         self.map_conf = STS_Config['map']
         self.choice_list = [x.lower() for x in game_state['game_state']['choice_list']]
-        self.getAllPaths()
+        self.getBestPath()
 
     def choice_bonus(self):
         for path_info in self.paths_info:
             # gold related
             tmp_dict = {}
+            path_info['choice_bonus'] = []
             if 'gain 250 gold' in self.choice_list[2]:
                 tmp_dict = {'choice_bonus_type': 'gain 250 gold'}
                 if path_info['store_before_first_elite']:
@@ -80,12 +81,17 @@ class PathEvaluator:
                 elif path_info['store_index'] >= 7:
                     tmp_dict['choice_bonus_score'] = -5
             if tmp_dict:
-                path_info['choice_bonus'] = [tmp_dict]
+                path_info['choice_bonus'].append(tmp_dict)
             # neow's lament
             if path_info['monster_count_before_first_elite'] < 3:
                 tmp_dict['choice_bonus_score'] = 5
                 tmp_dict['choice_bonus_type'] = 'neow\'s lament'
                 path_info['choice_bonus'].append(tmp_dict)
+            if path_info['choice_bonus']:
+                path_info['choice_bonus'] = sorted(path_info['choice_bonus'],
+                                                   key=lambda x: x['choice_bonus_score'], reverse=True)
+                path_info['score'] += path_info['choice_bonus'][0]['choice_bonus_score']
+                print('test')
 
     def calc_path_score(self, path):
         score = 0
@@ -142,7 +148,7 @@ class PathEvaluator:
             "hp": current_hp
         }
 
-    def getAllPaths(self):
+    def getBestPath(self):
         end_node = STS_Config['map']['end_node']
         sts_map = self.game_state['game_state']['map']
         sts_map.append(end_node)
@@ -197,9 +203,8 @@ class PathEvaluator:
                     path_info['score'] += self.count_dict.get(key, 0) / avg
 
         # self.paths_info sort by score
+        self.choice_bonus()
         self.paths_info = sorted(self.paths_info, key=lambda x: x['score'], reverse=True)
-        # self.calc_path_score(self.paths_info[0]['path'])
-        return self.paths_info
 
     def basicProcessPath(self, path):
         # count elite and campfire

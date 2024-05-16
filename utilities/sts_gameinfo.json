@@ -2,6 +2,12 @@
   "key_cards": [
     "rampage"
   ],
+  "potions": [
+    {
+      "name": "attack_potion",
+      "level": 3.5
+    }
+  ],
   "cards_for_case": {
     "need_self_harm": [
       "blood_for_blood",
@@ -2028,7 +2034,7 @@
       "monster": {
         "hp_consumption": -10,
         "hp_consumption_act1_first3": 4,
-        "profit": 1,
+        "profit": 3,
         "symbol": "M",
         "gold": [
           10,
@@ -2101,7 +2107,7 @@
           "remove 2 cards": 10,
           "transform 2 cards": 5,
           "gain 250 gold": 15,
-          "choose a rare card to obtain": 10,
+          "choose a rare card to obtain": 7,
           "obtain a random rare relic": 12,
           "max hp +16": 8
         }
