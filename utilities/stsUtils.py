@@ -1,6 +1,28 @@
 # -*- coding: utf-8 -*-
 import json
 from sts_config import STS_Config
+import random
+
+
+def visualize_map(pos_list):
+    with open('../map.md', encoding='utf-8') as the_file:
+        map_v = the_file.read()
+    # remove first 7 letter of each line
+    # map_v = '\n'.join([x[7:] for x in map_v.split('\n')])
+    map_v = [list(x[7:]) for x in map_v.split('\n') if x != '']
+    line_cnt = len(map_v)
+    for pos in pos_list[:15]:
+        x = 3 * pos['x']
+        y = line_cnt - 1 - 2 * pos['y']
+        if x - 1 >= 0:
+            map_v[y][x - 1] = '('
+        if x + 1 >= len(map_v[y]):
+            map_v[y].append('_')
+        map_v[y][x + 1] = ')'
+        # print(f'paint: {x}, {y}. {map_v[y][x]}')
+
+    # join the list
+    print('\n'.join([''.join(x) for x in map_v]))
 
 
 def getNodeByXY(x, y, all_nodes):
@@ -108,8 +130,13 @@ class PathEvaluator:
                 pass
             else:
                 # throw error
-                print(node['symbol'])
+                # print(node['symbol'])
                 raise Exception('Unknown symbol')
+            # get max and min from list
+            g_max = max(self.map_conf['room_type'][kw]['gold'])
+            g_min = min(self.map_conf['room_type'][kw]['gold'])
+            gold += random.randint(g_min, g_max)
+
         return {
             "score": score,
             "hp": current_hp
@@ -147,7 +174,6 @@ class PathEvaluator:
             if basic_info['elite_count'] < 2 or basic_info['campfire_count'] < 2:
                 continue
             score_tmp_dict = self.calc_path_score(path)
-            print(score_tmp_dict)
             # before first elite
             if basic_info['store_before_first_elite'] or basic_info['campfire_before_first_elite']:
                 score_tmp_dict['score'] += 3
@@ -170,6 +196,9 @@ class PathEvaluator:
                 if key in self.count_dict:
                     path_info['score'] += self.count_dict.get(key, 0) / avg
 
+        # self.paths_info sort by score
+        self.paths_info = sorted(self.paths_info, key=lambda x: x['score'], reverse=True)
+        # self.calc_path_score(self.paths_info[0]['path'])
         return self.paths_info
 
     def basicProcessPath(self, path):
@@ -214,9 +243,8 @@ class PathEvaluator:
 
 
 if __name__ == '__main__':
-    # k = PathEvaluator()
-    # paths = k.getAllPaths()
     with open('../game_state.json', encoding='utf-8') as f:
         gs = json.load(f)
     path_eval = PathEvaluator(gs)
+    visualize_map(path_eval.paths_info[0]['path'])
     print('done')

@@ -2001,38 +2001,75 @@
       "elite": {
         "hp_consumption": -20,
         "profit": 5,
-        "symbol": "E"
+        "symbol": "E",
+        "gold": [
+          25,
+          35
+        ]
       },
       "elite_with_fire": {
         "hp_consumption": -30,
         "profit": 8,
-        "symbol": "E"
+        "symbol": "E",
+        "gold": [
+          25,
+          35
+        ]
       },
       "question_mark": {
         "hp_consumption": -3,
         "profit": 0.8,
-        "symbol": "?"
+        "symbol": "?",
+        "gold": [
+          0,
+          0
+        ]
       },
       "monster": {
         "hp_consumption": -10,
         "hp_consumption_act1_first3": 4,
         "profit": 1,
-        "symbol": "M"
+        "symbol": "M",
+        "gold": [
+          10,
+          20
+        ]
       },
       "campfire": {
         "hp_consumption": 10,
         "profit": 5,
-        "symbol": "R"
+        "symbol": "R",
+        "gold": [
+          0,
+          0
+        ]
       },
       "treasure": {
         "hp_consumption": 0,
         "profit": 5,
-        "symbol": "T"
+        "symbol": "T",
+        "gold": [
+          20,
+          40
+        ]
+      },
+      "boss": {
+        "hp_consumption": -80,
+        "profit": 10,
+        "symbol": "B",
+        "gold": [
+          95,
+          105
+        ]
       },
       "shop": {
         "hp_consumption": 0,
         "profit": 4,
-        "symbol": "$"
+        "symbol": "$",
+        "gold": [
+          -70,
+          -150
+        ]
       }
     }
   },
