@@ -93,12 +93,11 @@ def basicProcessPath(path):
 class PathEvaluator:
     def __init__(self, game_state):
         self.neow_event_choice = None
-        self.game_state = game_state
-        self.neows_choices = self.game_state['game_state']['choice_list']
+        self.game_state = game_state.game_state_json
+        self.neows_choices = [x.lower() for x in self.game_state['choice_list']]
         self.count_dict = {}
         self.paths_info = []
         self.map_conf = STS_Config['map']
-        self.choice_list = [x.lower() for x in game_state['game_state']['choice_list']]
         self.getBestPath()
 
     def choice_bonus(self):
@@ -106,16 +105,16 @@ class PathEvaluator:
             # gold related
             tmp_dict = {}
             path_info['choice_bonus'] = []
-            if 'gain 250 gold' in self.choice_list[2]:
+            if 'gain 250 gold' in self.neows_choices[2]:
                 tmp_dict = {'choice_bonus_type': 'gain 250 gold'}
                 if path_info['store_before_first_elite']:
                     tmp_score = 4
-                    if 'obtain a curse' in self.choice_list[2]:
+                    if 'obtain a curse' in self.neows_choices[2]:
                         tmp_score += 2
                     tmp_dict['choice_bonus_score'] = tmp_score
                 elif path_info['store_index'] >= 7:
                     tmp_dict['choice_bonus_score'] = -5
-            elif 'receive 100 gold' == self.choice_list[1]:
+            elif 'receive 100 gold' == self.neows_choices[1]:
                 tmp_dict = {'choice_bonus_type': 'receive 100 gold'}
                 if path_info['store_before_first_elite']:
                     tmp_dict['choice_bonus_score'] = 4
@@ -135,15 +134,15 @@ class PathEvaluator:
 
     def calc_path_score(self, path):
         score = 0
-        current_hp = self.game_state['game_state']['current_hp']
-        gold = self.game_state['game_state']['gold']
+        current_hp = self.game_state['current_hp']
+        gold = self.game_state['gold']
         monster_room_count = 0
         keyword_map = self.map_conf['keyword_map']
         for node in path:
             kw = keyword_map[node['symbol']]
             if node['symbol'] == 'M':
                 score += self.map_conf['room_type']['monster']['profit']
-                if self.game_state['game_state']['act'] == 1:
+                if self.game_state['act'] == 1:
                     if monster_room_count <= 3:
                         current_hp += self.map_conf['room_type'][kw]['hp_consumption']
                     else:
@@ -190,7 +189,7 @@ class PathEvaluator:
 
     def getBestPath(self):
         end_node = STS_Config['map']['end_node']
-        sts_map = self.game_state['game_state']['map']
+        sts_map = self.game_state['map']
         sts_map.append(end_node)
         # get all node with y = 0
         start_nodes = [node for node in sts_map if node['y'] == 0]
@@ -246,23 +245,31 @@ class PathEvaluator:
         self.choice_bonus()
         self.paths_info = sorted(self.paths_info, key=lambda x: x['score'], reverse=True)
         if len(self.paths_info[0]['choice_bonus']):
-            for i, choice in enumerate(self.game_state['game_state']['choice_list']):
+            for i, choice in enumerate(self.game_state['choice_list']):
                 if self.paths_info[0]['choice_bonus'][0]['choice_bonus_type'] in choice:
-                    self.neow_event_choice = i
+                    self.neow_event_choice = (i, 'no_target')
                     break
         else:
             # merge two dict
-            choice_scores = [STS_Config['events']['neow_event']['1st_blessing'][self.neows_choices[0]],
-                             STS_Config['events']['neow_event']['2nd_blessing'][self.neows_choices[1]]]
+            choice_scores = [(STS_Config['events']['neow_event']['1st_blessing'][self.neows_choices[0]]['score'],
+                              STS_Config['events']['neow_event']['1st_blessing'][self.neows_choices[0]]['target']),
+                             (STS_Config['events']['neow_event']['2nd_blessing'][self.neows_choices[1]]['score'],
+                              STS_Config['events']['neow_event']['2nd_blessing'][self.neows_choices[1]]['target']),
+                             ]
             t_3rd_blessing_adv = STS_Config['events']['neow_event']['3rd_blessing']['advantages'].copy()
             t_3rd_blessing_dis = STS_Config['events']['neow_event']['3rd_blessing']['disadvantages'].copy()
             score_for_3rd_blessing = 0
             t_3rd_blessing_adv.update(t_3rd_blessing_dis)
+            t_3rd_target = ''
             for key in t_3rd_blessing_adv:
-                if key in self.choice_list[2]:
-                    score_for_3rd_blessing += t_3rd_blessing_adv[key]
-            choice_scores.append(score_for_3rd_blessing)
-            self.neow_event_choice = choice_scores.index(max(choice_scores))
+                if key in self.neows_choices[2]:
+                    score_for_3rd_blessing += t_3rd_blessing_adv[key]['score']
+                    if 'target' in t_3rd_blessing_adv[key]:
+                        t_3rd_target = t_3rd_blessing_adv[key]['target']
+            choice_scores.append((score_for_3rd_blessing, t_3rd_target))
+            t_best = max(choice_scores, key=lambda x: x[0])
+            self.neow_event_choice = (choice_scores.index(t_best), t_best[1].lower())
+        # choice = self.neows_choices[self.neow_event_choice]
 
 
 if __name__ == '__main__':

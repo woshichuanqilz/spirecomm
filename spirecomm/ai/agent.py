@@ -22,6 +22,7 @@ class SimpleAgent:
         self.chosen_class = chosen_class
         self.priorities = Priority()
         self.change_class(chosen_class)
+        self.choice_for_neow_event = -1
 
     def change_class(self, new_class):
         self.chosen_class = new_class
@@ -139,8 +140,15 @@ class SimpleAgent:
 
     def handle_screen(self):
         if self.game.screen_type == ScreenType.EVENT:
-            if self.game.screen.event_id == ["Neow Event"]:
-                return ChooseAction(PathEvaluator(self.game).neow_event_choice)
+            if self.game.screen.event_id == "Neow Event":
+                if self.game.choice_list[0] == 'talk':
+                    return ChooseAction(0)
+                p = PathEvaluator(self.game)
+                choice = p.neow_event_choice[0]
+                target = p.neow_event_choice[1]
+                if target != 'no_target':
+                    self.choice_for_neow_event = target
+                return ChooseAction(choice)
             elif self.game.screen.event_id in ["Vampires", "Masked Bandits", "Knowing Skull", "Ghosts", "Liars Game",
                                                "Golden Idol", "Drug Dealer", "The Library"]:
                 return ChooseAction(len(self.game.screen.options) - 1)

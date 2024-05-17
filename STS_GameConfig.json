@@ -2082,34 +2082,93 @@
   "events": {
     "neow_event": {
       "1st_blessing": {
-        "remove a card": 2,
-        "transform a card": 1,
-        "upgrade a card": 5,
-        "choose a card to obtain": 7,
-        "choose an uncommon colorless card to obtain": 3,
-        "obtain a random rare card": 3
+        "remove a card": {
+          "score": 2,
+          "target": "Strike_R"
+        },
+        "transform a card": {
+          "score": 2,
+          "target": "Strike_R"
+        },
+        "upgrade a card": {
+          "score": 5,
+          "target": "Bash"
+        },
+        "choose a card to obtain": {
+          "score": 7,
+          "target": "tbd"
+        },
+        "choose an uncommon colorless card to obtain": {
+          "score": 3,
+          "target": "tbd"
+        },
+        "obtain a random rare card": {
+          "score": 5,
+          "target": "no_target"
+        }
       },
       "2nd_blessing": {
-        "max hp +8": 1,
-        "enemies in the next three combat will have one health": 7,
-        "obtain a random common relic": 7,
-        "receive 100 gold": 9,
-        "obtain 3 random potions": 1
+        "max hp +8": {
+          "score": 1,
+          "target": "no_target"
+        },
+        "enemies in the next three combat will have one health": {
+          "score": 7,
+          "target": "no_target"
+        },
+        "obtain a random common relic": {
+          "score": 7,
+          "target": "no_target"
+        },
+        "receive 100 gold": {
+          "score": 9,
+          "target": "no_target"
+        },
+        "obtain 3 random potions": {
+          "score": 1,
+          "target": "no_target"
+        }
       },
       "3rd_blessing": {
         "disadvantages": {
-          "lose maxh health": -2,
-          "take damage": -5,
-          "obtain a curse": -5,
-          "lose all gold": -3
+          "lose maxh health": {
+            "score": -2
+          },
+          "take damage": {
+            "score": -5
+          },
+          "obtain a curse": {
+            "score": -5
+          },
+          "lose all gold": {
+            "score": -3
+          }
         },
         "advantages": {
-          "remove 2 cards": 10,
-          "transform 2 cards": 5,
-          "gain 250 gold": 15,
-          "choose a rare colorless card to obtain": 7,
-          "obtain a random rare relic": 12,
-          "max hp +16": 8
+          "remove 2 cards": {
+            "score": 10,
+            "target": "Strike_R, Strike_R"
+          },
+          "transform 2 cards": {
+            "score": 5,
+            "target": "Strike_R, Strike_R"
+          },
+          "gain 250 gold": {
+            "score": 15,
+            "target": "no_target"
+          },
+          "choose a rare colorless card to obtain": {
+            "score": 7,
+            "target": "tbd"
+          },
+          "obtain a random rare relic": {
+            "score": 12,
+            "target": "no_target"
+          },
+          "max hp +16": {
+            "score": 8,
+            "target": "no_target"
+          }
         }
       }
     }

@@ -66,10 +66,12 @@ class Game:
         self.play_available = False
         self.proceed_available = False
         self.cancel_available = False
+        self.game_state_json = None
 
     @classmethod
     def from_json(cls, json_state, available_commands):
         game = cls()
+        game.game_state_json = json_state
         game.current_action = json_state.get("current_action", None)
         game.current_hp = json_state.get("current_hp")
         game.max_hp = json_state.get("max_hp")
