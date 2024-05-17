@@ -7,8 +7,6 @@ import random
 def visualize_map(pos_list):
     with open('../map.md', encoding='utf-8') as the_file:
         map_v = the_file.read()
-    # remove first 7 letter of each line
-    # map_v = '\n'.join([x[7:] for x in map_v.split('\n')])
     map_v = [list(x[7:]) for x in map_v.split('\n') if x != '']
     line_cnt = len(map_v)
     for pos in pos_list[:15]:
@@ -51,9 +49,52 @@ def find_paths(start_nodes, all_nodes):
     return paths
 
 
+def basicProcessPath(path):
+    # count elite and campfire
+    elite_count = 0
+    campfire_count = 0
+    for node in path:
+        if node['symbol'] == 'E':
+            elite_count += 1
+        if node['symbol'] == 'R':
+            campfire_count += 1
+    # index of first store
+    store_index = -1
+    for i, node in enumerate(path):
+        if node['symbol'] == '$':
+            store_index = i
+            break
+    # if store before the first elite
+    store_before_first_elite = False
+    if store_index != -1:
+        for i, node in enumerate(path):
+            if node['symbol'] == 'E':
+                if i < store_index:
+                    store_before_first_elite = True
+                    break
+    # if campfire before the first elite
+    campfire_before_first_elite = False
+    if store_index != -1:
+        for i, node in enumerate(path):
+            if node['symbol'] == 'E':
+                if i < store_index:
+                    campfire_before_first_elite = True
+                    break
+
+    return {
+        "elite_count": elite_count,
+        "campfire_count": campfire_count,
+        "store_index": store_index,
+        "store_before_first_elite": store_before_first_elite,
+        "campfire_before_first_elite": campfire_before_first_elite
+    }
+
+
 class PathEvaluator:
     def __init__(self, game_state):
+        self.neow_event_choice = None
         self.game_state = game_state
+        self.neows_choices = self.game_state['game_state']['choice_list']
         self.count_dict = {}
         self.paths_info = []
         self.map_conf = STS_Config['map']
@@ -91,7 +132,6 @@ class PathEvaluator:
                 path_info['choice_bonus'] = sorted(path_info['choice_bonus'],
                                                    key=lambda x: x['choice_bonus_score'], reverse=True)
                 path_info['score'] += path_info['choice_bonus'][0]['choice_bonus_score']
-                print('test')
 
     def calc_path_score(self, path):
         score = 0
@@ -176,7 +216,7 @@ class PathEvaluator:
                     monster_count_before_first_elite += 1
 
             # dict extend
-            basic_info = self.basicProcessPath(path)
+            basic_info = basicProcessPath(path)
             if basic_info['elite_count'] < 2 or basic_info['campfire_count'] < 2:
                 continue
             score_tmp_dict = self.calc_path_score(path)
@@ -205,51 +245,30 @@ class PathEvaluator:
         # self.paths_info sort by score
         self.choice_bonus()
         self.paths_info = sorted(self.paths_info, key=lambda x: x['score'], reverse=True)
-
-    def basicProcessPath(self, path):
-        # count elite and campfire
-        elite_count = 0
-        campfire_count = 0
-        for node in path:
-            if node['symbol'] == 'E':
-                elite_count += 1
-            if node['symbol'] == 'R':
-                campfire_count += 1
-        # index of first store
-        store_index = -1
-        for i, node in enumerate(path):
-            if node['symbol'] == '$':
-                store_index = i
-                break
-        # if store before the first elite
-        store_before_first_elite = False
-        if store_index != -1:
-            for i, node in enumerate(path):
-                if node['symbol'] == 'E':
-                    if i < store_index:
-                        store_before_first_elite = True
-                        break
-        # if campfire before the first elite
-        campfire_before_first_elite = False
-        if store_index != -1:
-            for i, node in enumerate(path):
-                if node['symbol'] == 'E':
-                    if i < store_index:
-                        campfire_before_first_elite = True
-                        break
-
-        return {
-            "elite_count": elite_count,
-            "campfire_count": campfire_count,
-            "store_index": store_index,
-            "store_before_first_elite": store_before_first_elite,
-            "campfire_before_first_elite": campfire_before_first_elite
-        }
+        if len(self.paths_info[0]['choice_bonus']):
+            for i, choice in enumerate(self.game_state['game_state']['choice_list']):
+                if self.paths_info[0]['choice_bonus'][0]['choice_bonus_type'] in choice:
+                    self.neow_event_choice = i
+                    break
+        else:
+            # merge two dict
+            choice_scores = [STS_Config['events']['neow_event']['1st_blessing'][self.neows_choices[0]],
+                             STS_Config['events']['neow_event']['2nd_blessing'][self.neows_choices[1]]]
+            t_3rd_blessing_adv = STS_Config['events']['neow_event']['3rd_blessing']['advantages'].copy()
+            t_3rd_blessing_dis = STS_Config['events']['neow_event']['3rd_blessing']['disadvantages'].copy()
+            score_for_3rd_blessing = 0
+            t_3rd_blessing_adv.update(t_3rd_blessing_dis)
+            for key in t_3rd_blessing_adv:
+                if key in self.choice_list[2]:
+                    score_for_3rd_blessing += t_3rd_blessing_adv[key]
+            choice_scores.append(score_for_3rd_blessing)
+            self.neow_event_choice = choice_scores.index(max(choice_scores))
+            print('the best choice is ', self.choice_list[self.neow_event_choice])
 
 
 if __name__ == '__main__':
     with open('../game_state.json', encoding='utf-8') as f:
         gs = json.load(f)
     path_eval = PathEvaluator(gs)
-    visualize_map(path_eval.paths_info[0]['path'])
-    print('done')
+    # visualize_map(path_eval.paths_info[0]['path'])
+    # print('done')

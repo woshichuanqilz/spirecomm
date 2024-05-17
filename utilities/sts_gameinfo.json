@@ -2094,7 +2094,7 @@
         "enemies in the next three combat will have one health": 7,
         "obtain a random common relic": 7,
         "receive 100 gold": 9,
-        "obtain 3 potions": 1
+        "obtain 3 random potions": 1
       },
       "3rd_blessing": {
         "disadvantages": {
@@ -2107,7 +2107,7 @@
           "remove 2 cards": 10,
           "transform 2 cards": 5,
           "gain 250 gold": 15,
-          "choose a rare card to obtain": 7,
+          "choose a rare colorless card to obtain": 7,
           "obtain a random rare relic": 12,
           "max hp +16": 8
         }
