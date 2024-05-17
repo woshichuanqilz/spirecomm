@@ -7,6 +7,7 @@ import spirecomm.spire.card
 from spirecomm.spire.screen import RestOption
 from spirecomm.communication.action import *
 from spirecomm.ai.priorities import *
+from utilities.SelectPath import PathEvaluator
 
 
 class SimpleAgent:
@@ -73,17 +74,20 @@ class SimpleAgent:
         return incoming_damage
 
     def get_low_hp_target(self):
-        available_monsters = [monster for monster in self.game.monsters if monster.current_hp > 0 and not monster.half_dead and not monster.is_gone]
+        available_monsters = [monster for monster in self.game.monsters if
+                              monster.current_hp > 0 and not monster.half_dead and not monster.is_gone]
         best_monster = min(available_monsters, key=lambda x: x.current_hp)
         return best_monster
 
     def get_high_hp_target(self):
-        available_monsters = [monster for monster in self.game.monsters if monster.current_hp > 0 and not monster.half_dead and not monster.is_gone]
+        available_monsters = [monster for monster in self.game.monsters if
+                              monster.current_hp > 0 and not monster.half_dead and not monster.is_gone]
         best_monster = max(available_monsters, key=lambda x: x.current_hp)
         return best_monster
 
     def many_monsters_alive(self):
-        available_monsters = [monster for monster in self.game.monsters if monster.current_hp > 0 and not monster.half_dead and not monster.is_gone]
+        available_monsters = [monster for monster in self.game.monsters if
+                              monster.current_hp > 0 and not monster.half_dead and not monster.is_gone]
         return len(available_monsters) > 1
 
     def get_play_card_action(self):
@@ -113,7 +117,8 @@ class SimpleAgent:
             # This shouldn't happen!
             return EndTurnAction()
         if card_to_play.has_target:
-            available_monsters = [monster for monster in self.game.monsters if monster.current_hp > 0 and not monster.half_dead and not monster.is_gone]
+            available_monsters = [monster for monster in self.game.monsters if
+                                  monster.current_hp > 0 and not monster.half_dead and not monster.is_gone]
             if len(available_monsters) == 0:
                 return EndTurnAction()
             if card_to_play.type == spirecomm.spire.card.CardType.ATTACK:
@@ -134,7 +139,10 @@ class SimpleAgent:
 
     def handle_screen(self):
         if self.game.screen_type == ScreenType.EVENT:
-            if self.game.screen.event_id in ["Vampires", "Masked Bandits", "Knowing Skull", "Ghosts", "Liars Game", "Golden Idol", "Drug Dealer", "The Library"]:
+            if self.game.screen.event_id == ["Neow Event"]:
+                return ChooseAction(PathEvaluator(self.game).neow_event_choice)
+            elif self.game.screen.event_id in ["Vampires", "Masked Bandits", "Knowing Skull", "Ghosts", "Liars Game",
+                                               "Golden Idol", "Drug Dealer", "The Library"]:
                 return ChooseAction(len(self.game.screen.options) - 1)
             else:
                 return ChooseAction(0)
@@ -191,7 +199,8 @@ class SimpleAgent:
                 return ProceedAction()
             # Usually, we don't want to choose the whole hand for a hand select. 3 seems like a good compromise.
             num_cards = min(self.game.screen.num_cards, 3)
-            return CardSelectAction(self.priorities.get_cards_for_action(self.game.current_action, self.game.screen.cards, num_cards))
+            return CardSelectAction(
+                self.priorities.get_cards_for_action(self.game.current_action, self.game.screen.cards, num_cards))
         else:
             return ProceedAction()
 
@@ -225,7 +234,8 @@ class SimpleAgent:
     def choose_card_reward(self):
         reward_cards = self.game.screen.cards
         if self.game.screen.can_skip and not self.game.in_combat:
-            pickable_cards = [card for card in reward_cards if self.priorities.needs_more_copies(card, self.count_copies_in_deck(card))]
+            pickable_cards = [card for card in reward_cards if
+                              self.priorities.needs_more_copies(card, self.count_copies_in_deck(card))]
         else:
             pickable_cards = reward_cards
         if len(pickable_cards) > 0:
@@ -244,16 +254,16 @@ class SimpleAgent:
         min_reward = min(node_rewards.values())
         map_height = max(self.game.map.nodes.keys())
         for y in range(0, map_height):
-            best_rewards[y+1] = {node.x: min_reward * 20 for node in self.game.map.nodes[y+1].values()}
-            best_parents[y+1] = {node.x: -1 for node in self.game.map.nodes[y+1].values()}
+            best_rewards[y + 1] = {node.x: min_reward * 20 for node in self.game.map.nodes[y + 1].values()}
+            best_parents[y + 1] = {node.x: -1 for node in self.game.map.nodes[y + 1].values()}
             for x in best_rewards[y]:
                 node = self.game.map.get_node(x, y)
                 best_node_reward = best_rewards[y][x]
                 for child in node.children:
                     test_child_reward = best_node_reward + node_rewards[child.symbol]
-                    if test_child_reward > best_rewards[y+1][child.x]:
-                        best_rewards[y+1][child.x] = test_child_reward
-                        best_parents[y+1][child.x] = node.x
+                    if test_child_reward > best_rewards[y + 1][child.x]:
+                        best_rewards[y + 1][child.x] = test_child_reward
+                        best_parents[y + 1][child.x] = node.x
         best_path = [0] * (map_height + 1)
         best_path[map_height] = max(best_rewards[map_height].keys(), key=lambda x: best_rewards[map_height][x])
         for y in range(map_height, 0, -1):
@@ -272,4 +282,3 @@ class SimpleAgent:
                 return ChooseMapNodeAction(choice)
         # This should never happen
         return ChooseAction(0)
-

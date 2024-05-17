@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
-from sts_config import STS_Config
+from utilities.sts_config import STS_Config
 import random
 
 
@@ -263,7 +263,6 @@ class PathEvaluator:
                     score_for_3rd_blessing += t_3rd_blessing_adv[key]
             choice_scores.append(score_for_3rd_blessing)
             self.neow_event_choice = choice_scores.index(max(choice_scores))
-            print('the best choice is ', self.choice_list[self.neow_event_choice])
 
 
 if __name__ == '__main__':
