@@ -22,7 +22,8 @@ class SimpleAgent:
         self.chosen_class = chosen_class
         self.priorities = Priority()
         self.change_class(chosen_class)
-        self.choice_for_neow_event = -1
+        self.choice_for_neow_event = []
+        self.path_evaluator = None
 
     def change_class(self, new_class):
         self.chosen_class = new_class
@@ -141,13 +142,13 @@ class SimpleAgent:
     def handle_screen(self):
         if self.game.screen_type == ScreenType.EVENT:
             if self.game.screen.event_id == "Neow Event":
-                if self.game.choice_list[0] == 'talk':
+                if self.game.choice_list[0] in ['talk', 'leave']:
                     return ChooseAction(0)
-                p = PathEvaluator(self.game)
-                choice = p.neow_event_choice[0]
-                target = p.neow_event_choice[1]
+                self.path_evaluator = PathEvaluator(self.game)
+                choice = self.path_evaluator.neow_event_choice[0]
+                target = self.path_evaluator.neow_event_choice[1]
                 if target != 'no_target':
-                    self.choice_for_neow_event = target
+                    self.choice_for_neow_event.append(target)
                 return ChooseAction(choice)
             elif self.game.screen.event_id in ["Vampires", "Masked Bandits", "Knowing Skull", "Ghosts", "Liars Game",
                                                "Golden Idol", "Drug Dealer", "The Library"]:
@@ -196,6 +197,10 @@ class SimpleAgent:
         elif self.game.screen_type == ScreenType.GRID:
             if not self.game.choice_available:
                 return ProceedAction()
+            if self.choice_for_neow_event:
+                result_list = [self.game.screen.cards[self.game.choice_list.index(x)]
+                               for x in self.choice_for_neow_event]
+                return CardSelectAction(result_list)
             if self.game.screen.for_upgrade or self.choose_good_card:
                 available_cards = self.priorities.get_sorted_cards(self.game.screen.cards)
             else:
@@ -280,7 +285,7 @@ class SimpleAgent:
 
     def make_map_choice(self):
         if len(self.game.screen.next_nodes) > 0 and self.game.screen.next_nodes[0].y == 0:
-            self.generate_map_route()
+            pos = (self.path_evaluator.best_path[0]['x'], self.path_evaluator.best_path[0]['y'])
             self.game.screen.current_node.y = -1
         if self.game.screen.boss_available:
             return ChooseMapBossAction()

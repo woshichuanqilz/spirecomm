@@ -49,7 +49,7 @@ def find_paths(start_nodes, all_nodes):
     return paths
 
 
-def basicProcessPath(path):
+def basicProcessPath(path, path_info):
     # count elite and campfire
     elite_count = 0
     campfire_count = 0
@@ -81,17 +81,37 @@ def basicProcessPath(path):
                     campfire_before_first_elite = True
                     break
 
-    return {
-        "elite_count": elite_count,
-        "campfire_count": campfire_count,
-        "store_index": store_index,
-        "store_before_first_elite": store_before_first_elite,
-        "campfire_before_first_elite": campfire_before_first_elite
-    }
+    path_info.elite_count = elite_count
+    path_info.campfire_count = campfire_count
+    path_info.store_index = store_index
+    path_info.store_before_first_elite = store_before_first_elite
+    path_info.campfire_before_first_elite = campfire_before_first_elite
+
+
+class ChoiceBonus:
+    def __init__(self, choice_bonus_type, choice_bonus_score=0):
+        self.choice_bonus_type = choice_bonus_type
+        self.choice_bonus_score = choice_bonus_score
+
+
+class PathInfo:
+    def __init__(self, path, score, hp, elite_count, campfire_count, store_index, store_before_first_elite,
+                 campfire_before_first_elite, monster_count_before_first_elite, choice_bonus):
+        self.path = path
+        self.score = score
+        self.hp = hp
+        self.elite_count = elite_count
+        self.campfire_count = campfire_count
+        self.store_index = store_index
+        self.store_before_first_elite = store_before_first_elite
+        self.campfire_before_first_elite = campfire_before_first_elite
+        self.monster_count_before_first_elite = monster_count_before_first_elite
+        self.choice_bonus = choice_bonus
 
 
 class PathEvaluator:
     def __init__(self, game_state):
+        self.best_path = None
         self.neow_event_choice = None
         self.game_state = game_state.game_state_json
         self.neows_choices = [x.lower() for x in self.game_state['choice_list']]
@@ -103,36 +123,40 @@ class PathEvaluator:
     def choice_bonus(self):
         for path_info in self.paths_info:
             # gold related
-            tmp_dict = {}
-            path_info['choice_bonus'] = []
+            tmp_bonus = ChoiceBonus('tbd')
+            path_info.choice_bonus = []
             if 'gain 250 gold' in self.neows_choices[2]:
-                tmp_dict = {'choice_bonus_type': 'gain 250 gold'}
+                tmp_bonus.choice_bonus_type = 'gain 250 gold'
                 if path_info['store_before_first_elite']:
-                    tmp_score = 4
+                    # tmp_score = 4
+                    tmp_bonus.choice_bonus_score = 4
                     if 'obtain a curse' in self.neows_choices[2]:
-                        tmp_score += 2
-                    tmp_dict['choice_bonus_score'] = tmp_score
-                elif path_info['store_index'] >= 7:
-                    tmp_dict['choice_bonus_score'] = -5
+                        # tmp_score += 2
+                        tmp_bonus.choice_bonus_score += 2
+                elif path_info.store_index >= 7:
+                    tmp_bonus.choice_bonus_score = -5
             elif 'receive 100 gold' == self.neows_choices[1]:
-                tmp_dict = {'choice_bonus_type': 'receive 100 gold'}
+                # tmp_bonus = {'choice_bonus_type': 'receive 100 gold'}
+                tmp_bonus = ChoiceBonus('receive 100 gold')
                 if path_info['store_before_first_elite']:
-                    tmp_dict['choice_bonus_score'] = 4
+                    # tmp_bonus['choice_bonus_score'] = 4
+                    tmp_bonus.choice_bonus_score = 4
                 elif path_info['store_index'] >= 7:
-                    tmp_dict['choice_bonus_score'] = -5
-            if tmp_dict:
-                path_info['choice_bonus'].append(tmp_dict)
+                    # tmp_bonus['choice_bonus_score'] = -5
+                    tmp_bonus.choice_bonus_score = -5
+            if tmp_bonus.choice_bonus_type != 'tbd':
+                path_info.choice_bonus.append(tmp_bonus)
             # neow's lament
-            if path_info['monster_count_before_first_elite'] < 3:
-                tmp_dict['choice_bonus_score'] = 5
-                tmp_dict['choice_bonus_type'] = 'neow\'s lament'
-                path_info['choice_bonus'].append(tmp_dict)
-            if path_info['choice_bonus']:
-                path_info['choice_bonus'] = sorted(path_info['choice_bonus'],
-                                                   key=lambda x: x['choice_bonus_score'], reverse=True)
-                path_info['score'] += path_info['choice_bonus'][0]['choice_bonus_score']
+            if path_info.monster_count_before_first_elite < 3:
+                tmp_bonus.choice_bonus_score = 5
+                tmp_bonus.choice_bonus_type = 'neow\'s lament'
+                path_info.choice_bonus.append(tmp_bonus)
+            if path_info.choice_bonus:
+                path_info.choice_bonus = sorted(path_info.choice_bonus,
+                                                key=lambda x: x.choice_bonus_score, reverse=True)
+                path_info.score += path_info.choice_bonus[0].choice_bonus_score
 
-    def calc_path_score(self, path):
+    def calc_path_score(self, path, tmp_path_info):
         score = 0
         current_hp = self.game_state['current_hp']
         gold = self.game_state['gold']
@@ -182,10 +206,8 @@ class PathEvaluator:
             g_min = min(self.map_conf['room_type'][kw]['gold'])
             gold += random.randint(g_min, g_max)
 
-        return {
-            "score": score,
-            "hp": current_hp
-        }
+        tmp_path_info.score = score
+        tmp_path_info.hp = current_hp
 
     def getBestPath(self):
         end_node = STS_Config['map']['end_node']
@@ -196,7 +218,9 @@ class PathEvaluator:
         tmp_paths = find_paths(start_nodes, sts_map)
 
         for path in tmp_paths:
-            tmp_dict = {'path': path}
+            # tmp_dict = {'path': path} to class
+            tmp_path_info = PathInfo(path, 0, self.game_state['current_hp'], 0, 0,
+                                     -1, False, False, 0, [])
             monster_count_before_first_elite = 0
             is_first_elite_appear = False
             for node in path:
@@ -210,24 +234,22 @@ class PathEvaluator:
                 # 计算第一个精英怪出现前的怪物数量
                 if node['symbol'] == 'E' and not is_first_elite_appear:
                     is_first_elite_appear = True
-                    tmp_dict['monster_count_before_first_elite'] = monster_count_before_first_elite
+                    # tmp_path['monster_count_before_first_elite'] = monster_count_before_first_elite
+                    tmp_path_info.monster_count_before_first_elite = monster_count_before_first_elite
                 if node['symbol'] == 'M' and not is_first_elite_appear:
                     monster_count_before_first_elite += 1
 
             # dict extend
-            basic_info = basicProcessPath(path)
-            if basic_info['elite_count'] < 2 or basic_info['campfire_count'] < 2:
+            basicProcessPath(path, tmp_path_info)
+            if tmp_path_info.elite_count < 2 or tmp_path_info.campfire_count < 2:
                 continue
-            score_tmp_dict = self.calc_path_score(path)
+            self.calc_path_score(path, tmp_path_info)
             # before first elite
-            if basic_info['store_before_first_elite'] or basic_info['campfire_before_first_elite']:
-                score_tmp_dict['score'] += 3
+            # if basic_info['store_before_first_elite'] or basic_info['campfire_before_first_elite']:
+            if tmp_path_info.store_before_first_elite or tmp_path_info.campfire_before_first_elite:
+                tmp_path_info.score += 3
 
-            self.paths_info.append({
-                **tmp_dict,
-                **score_tmp_dict,
-                **basic_info
-            })
+            self.paths_info.append(tmp_path_info)
         # sort self.count_dict by value and get top 5 items
         self.count_dict = dict(sorted(self.count_dict.items(), key=lambda x: x[1], reverse=True)[:5])
         tmp_sum = 0
@@ -236,17 +258,17 @@ class PathEvaluator:
         avg = tmp_sum / len(self.count_dict)
 
         for path_info in self.paths_info:
-            for node in path_info['path']:
+            for node in path_info.path:
                 key = str(node['x']) + '-' + str(node['y'])
                 if key in self.count_dict:
-                    path_info['score'] += self.count_dict.get(key, 0) / avg
+                    path_info.score += self.count_dict.get(key, 0) / avg
 
         # self.paths_info sort by score
         self.choice_bonus()
-        self.paths_info = sorted(self.paths_info, key=lambda x: x['score'], reverse=True)
-        if len(self.paths_info[0]['choice_bonus']):
+        self.paths_info = sorted(self.paths_info, key=lambda x: x.score, reverse=True)
+        if len(self.paths_info[0].choice_bonus):
             for i, choice in enumerate(self.game_state['choice_list']):
-                if self.paths_info[0]['choice_bonus'][0]['choice_bonus_type'] in choice:
+                if self.paths_info[0].choice_bonus[0].choice_bonus_type in choice:
                     self.neow_event_choice = (i, 'no_target')
                     break
         else:
@@ -269,6 +291,7 @@ class PathEvaluator:
             choice_scores.append((score_for_3rd_blessing, t_3rd_target))
             t_best = max(choice_scores, key=lambda x: x[0])
             self.neow_event_choice = (choice_scores.index(t_best), t_best[1].lower())
+        self.best_path = self.paths_info[0]
         # choice = self.neows_choices[self.neow_event_choice]
 
 
