@@ -8,6 +8,7 @@ from spirecomm.spire.screen import RestOption
 from spirecomm.communication.action import *
 from spirecomm.ai.priorities import *
 from utilities.SelectPath import PathEvaluator
+from spirecomm.spire.map import Node
 
 
 class SimpleAgent:
@@ -285,8 +286,10 @@ class SimpleAgent:
 
     def make_map_choice(self):
         if len(self.game.screen.next_nodes) > 0 and self.game.screen.next_nodes[0].y == 0:
-            pos = (self.path_evaluator.best_path[0]['x'], self.path_evaluator.best_path[0]['y'])
+            pos = (self.path_evaluator.best_path.path[0]['x'], self.path_evaluator.best_path.path[0]['y'])
             self.game.screen.current_node.y = -1
+            choice = Node(pos[0], pos[1], self.path_evaluator.best_path.path[0]['symbol'])
+            return ChooseMapNodeAction(choice)
         if self.game.screen.boss_available:
             return ChooseMapBossAction()
         chosen_x = self.map_route[self.game.screen.current_node.y + 1]

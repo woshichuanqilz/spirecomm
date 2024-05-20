@@ -126,3 +126,5 @@ dmypy.json
 .idea/
 map.md
 map.md
+action_queue.json
+test.md

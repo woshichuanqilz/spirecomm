@@ -133,6 +133,12 @@ class Coordinator:
         :return: None
         """
         self.action_queue.append(action)
+        # write action_queue to json file
+        # d = {'actions': []}
+        # for a in self.action_queue:
+        #     d['actions'].append(a.to_json())
+        # with open('action_queue.json', 'w') as f:
+        #     json.dump(d, f)
 
     def clear_actions(self):
         """Remove all actions from the action queue
@@ -140,6 +146,15 @@ class Coordinator:
         :return: None
         """
         self.action_queue.clear()
+        # remove json file
+        # with open('action_queue.json', 'w') as f:
+        #     f.write('')
+
+    def read_actions_from_json(self):
+        with open('action_queue.json', 'r') as f:
+            d = json.load(f)
+        for a in d['actions']:
+            self.action_queue.append(Action.from_json(a))
 
     def execute_next_action(self):
         """Immediately execute the next action in the action queue
@@ -229,6 +244,8 @@ class Coordinator:
                     new_action = self.out_of_game_callback()
                     self.add_action_to_queue(new_action)
             return True
+        # else:
+        #     self.send_message('state')
         return False
 
     def run(self):
@@ -259,6 +276,9 @@ class Coordinator:
         if not self.in_game:
             StartGameAction(player_class, ascension_level, seed).execute(self)
             self.receive_game_state_update(block=True)
+        else:
+            if self.input_queue.empty():
+                self.send_message('state')
         while self.in_game:
             self.execute_next_action_if_ready()
             self.receive_game_state_update()

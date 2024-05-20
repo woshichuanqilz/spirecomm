@@ -28,6 +28,12 @@ class Action:
         """
         coordinator.send_message(self.command)
 
+    def to_json(self):
+        return {
+            'command': self.command,
+            'requires_game_ready': self.requires_game_ready
+        }
+
 
 class PlayCardAction(Action):
     """An action to play a specified card from your hand"""
@@ -116,6 +122,14 @@ class ChooseAction(Action):
             coordinator.send_message("{} {}".format(self.command, self.name))
         else:
             coordinator.send_message("{} {}".format(self.command, self.choice_index))
+
+    def to_json(self):
+        return {
+            'command': self.command,
+            'requires_game_ready': self.requires_game_ready,
+            'choice_index': self.choice_index,
+            'name': self.name
+        }
 
 
 class ChooseShopkeeperAction(ChooseAction):
@@ -271,6 +285,16 @@ class CardSelectAction(Action):
         for index in chosen_indices:
             coordinator.add_action_to_queue(ChooseAction(choice_index=index))
         coordinator.add_action_to_queue(OptionalCardSelectConfirmAction())
+
+    def to_json(self):
+        return {
+            'command': self.command,
+            'requires_game_ready': self.requires_game_ready,
+            'cards': [card.name for card in self.cards]
+        }
+
+    # def from_json(json_data):
+    #     return CardSelectAction([Card.from_name(card_name) for card_name in json_data['cards']])
 
 
 class ChooseMapNodeAction(ChooseAction):
