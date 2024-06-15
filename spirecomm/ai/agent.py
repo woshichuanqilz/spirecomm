@@ -25,6 +25,7 @@ class SimpleAgent:
         self.change_class(chosen_class)
         self.choice_for_neow_event = []
         self.path_evaluator = None
+        self.battle_strategy = None
 
     def change_class(self, new_class):
         self.chosen_class = new_class
@@ -47,10 +48,11 @@ class SimpleAgent:
         if self.game.proceed_available:
             return ProceedAction()
         if self.game.play_available:
-            if self.game.room_type == "MonsterRoomBoss" and len(self.game.get_real_potions()) > 0:
-                potion_action = self.use_next_potion()
-                if potion_action is not None:
-                    return potion_action
+            # if self.game.room_type == "MonsterRoomBoss" and len(self.game.get_real_potions()) > 0:
+            #     potion_action = self.use_next_potion()
+            #     if potion_action is not None:
+            #         return potion_action
+
             return self.get_play_card_action()
         if self.game.end_available:
             return EndTurnAction()
